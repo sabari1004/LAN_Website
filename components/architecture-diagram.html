@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP Enterprise Mobility & Applied AI Pipeline - LAN Innovations</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'canvas-dark': '#020617',
+            'slate-dark': '#0B0F19',
+            'surface-slate': '#0F172A',
+            'surface-elevated': '#151F36',
+            'border-slate': '#1E293B',
+            'border-subtle': '#334155',
+            'accent-sky': '#0284C7',
+            'accent-sky-bright': '#38BDF8',
+            'accent-emerald': '#10B981',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#020617] text-slate-100 min-h-screen p-4 sm:p-8 flex items-center justify-center font-sans antialiased selection:bg-[#0284C7] selection:text-white">
+
+  <!-- ====================================================================
+       REUSABLE STANDALONE ARCHITECTURE COMPONENT: LAN INNOVATIONS
+       Copy from here to embed directly in any HTML/Tailwind project.
+       ==================================================================== -->
+  <div id="lan-architecture-system" class="w-full max-w-7xl mx-auto rounded-2xl bg-[#0B0F19]/90 border border-[#1E293B] shadow-2xl backdrop-blur-xl p-5 sm:p-8 lg:p-10 relative overflow-hidden">
+    
+    <!-- Scoped Component Styles -->
+    <style>
+      .lan-node {
+        position: relative;
+        background: #0F172A;
+        border: 1px solid #1E293B;
+        border-radius: 12px;
+        transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+        user-select: none;
+      }
+      .lan-node:hover {
+        border-color: rgba(56, 189, 248, 0.6);
+        background: #151F36;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.25);
+      }
+      .lan-node.active-node {
+        border-color: #38BDF8;
+        background: #151F36;
+        box-shadow: 0 0 24px -2px rgba(56, 189, 248, 0.35);
+      }
+      .lan-node.active-node .node-pulse-indicator {
+        background-color: #38BDF8;
+        box-shadow: 0 0 12px #38BDF8;
+      }
+
+      /* Animated Bidirectional Flow Line (Horizontal Desktop) */
+      .flow-h-connector {
+        position: relative;
+        height: 2px;
+        background: #1E293B;
+        overflow: hidden;
+      }
+      .flow-h-connector::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, #38BDF8, transparent);
+        animation: flowPulseH 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes flowPulseH {
+        0% { left: -50%; }
+        100% { left: 150%; }
+      }
+
+      /* Animated Flow Line (Vertical Mobile) */
+      .flow-v-connector {
+        position: relative;
+        width: 2px;
+        height: 24px;
+        margin: 0 auto;
+        background: #1E293B;
+        overflow: hidden;
+      }
+      .flow-v-connector::after {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: linear-gradient(180deg, transparent, #38BDF8, transparent);
+        animation: flowPulseV 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      @keyframes flowPulseV {
+        0% { top: -50%; }
+        100% { top: 150%; }
+      }
+
+      /* Supervisory Layer Telemetry Wire */
+      .supervisory-wire {
+        stroke-dasharray: 6 4;
+        animation: dashStream 20s linear infinite;
+      }
+      @keyframes dashStream {
+        to { stroke-dashoffset: -100; }
+      }
+    </style>
+
+    <!-- Component Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#1E293B] gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/50 border border-sky-800/60 text-[#38BDF8] text-xs font-mono font-medium mb-2">
+          <span class="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
+          Enterprise Architecture Specification
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          SAP Mobility &amp; Autonomous AI Supervision Pipeline
+        </h2>
+        <p class="mt-1 text-xs sm:text-sm text-[#94A3B8]">
+          Bidirectional Clean Core delta synchronization flanked by an asynchronous event-driven AI telemetry supervisor.
+        </p>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button id="btn-flow-simulation" type="button" class="inline-flex items-center gap-2 bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-semibold px-4 py-2.5 rounded-lg border border-[#38BDF8] transition-all shadow-lg hover:shadow-sky-500/30">
+          <svg class="w-3.5 h-3.5 text-sky-200" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+          </svg>
+          <span id="simulation-btn-label">Simulate Pipeline Sync</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Grid: Left Interactive Flowchart & Right Dynamic Inspector -->
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- ==================================================================
+           LEFT COLUMN: INTERACTIVE PIPELINE FLOWCHART (7 cols on Desktop)
+           ================================================================== -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+
+        <!-- Stage Notice -->
+        <div class="flex items-center justify-between text-xs font-mono text-[#94A3B8]">
+          <span>Interactive Pipeline Nodes (Select to Inspect):</span>
+          <span class="text-[#38BDF8] hidden sm:inline">&bull; Bi-Directional Delta Sync</span>
+        </div>
+
+        <!-- Tier 1: Client Edge (SAP SSAM & MDK) -->
+        <div class="lan-node active-node p-5" data-node="ssam-edge" tabindex="0" role="button" aria-label="Inspect Client Edge Node">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#1E293B] border border-slate-700 flex items-center justify-center text-[#38BDF8]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono tracking-wider uppercase text-[#38BDF8] font-semibold">Tier 1 &bull; Client Edge</span>
+                <h3 class="text-base sm:text-lg font-bold text-white">SAP Service &amp; Asset Manager (SSAM)</h3>
+              </div>
+            </div>
+            <span class="node-pulse-indicator w-2.5 h-2.5 rounded-full bg-slate-600 transition-colors mt-1"></span>
+          </div>
+          <p class="mt-3 text-xs text-[#94A3B8] leading-relaxed">
+            Native iOS/Android application running compiled MDK metadata. Operates 100% offline with local encrypted SQLite, sensor input, and dynamic inspection forms.
+          </p>
+          <div class="mt-4 pt-3 border-t border-[#1E293B] flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-300">Offline SQLite &bull; MDK 23.8+</span>
+            <span class="text-emerald-400 font-medium">&check; 100% Offline Uptime</span>
+          </div>
+        </div>
+
+        <!-- Vertical Flow Connector (Visible on Mobile & Tablet) -->
+        <div class="flow-v-connector lg:hidden"></div>
+
+        <!-- Directional Sync Connector (Desktop) -->
+        <div class="hidden lg:flex items-center justify-between px-4 py-2 rounded-lg bg-[#0F172A]/70 border border-[#1E293B] text-[11px] font-mono text-slate-400">
+          <span class="text-[#38BDF8] font-bold">&uarr;&darr;</span>
+          <span>Chunked OData Batch Payloads / Local Change Log</span>
+          <div class="flex-1 mx-4 flow-h-connector"></div>
+          <span class="text-emerald-400">mTLS Encrypted</span>
+        </div>
+
+        <!-- Tier 2: Integration & Middleware (SAP BTP) -->
+        <div class="lan-node p-5" data-node="btp-middleware" tabindex="0" role="button" aria-label="Inspect Integration and Middleware Node">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#1E293B] border border-slate-700 flex items-center justify-center text-[#38BDF8]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono tracking-wider uppercase text-[#38BDF8] font-semibold">Tier 2 &bull; Integration &amp; Middleware</span>
+                <h3 class="text-base sm:text-lg font-bold text-white">SAP BTP Mobile Services</h3>
+              </div>
+            </div>
+            <span class="node-pulse-indicator w-2.5 h-2.5 rounded-full bg-slate-600 transition-colors mt-1"></span>
+          </div>
+          <p class="mt-3 text-xs text-[#94A3B8] leading-relaxed">
+            High-throughput API gateway, offline delta token management, OAuth 2.0 PKCE authentication, and secure Cloud Connector reverse proxy into private VPCs.
+          </p>
+          <div class="mt-4 pt-3 border-t border-[#1E293B] flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-300">OData v2/v4 &bull; Cloud Connector</span>
+            <span class="text-emerald-400 font-medium">p99: 42ms Tunnel</span>
+          </div>
+        </div>
+
+        <!-- Vertical Flow Connector (Visible on Mobile & Tablet) -->
+        <div class="flow-v-connector lg:hidden"></div>
+
+        <!-- Directional Sync Connector (Desktop) -->
+        <div class="hidden lg:flex items-center justify-between px-4 py-2 rounded-lg bg-[#0F172A]/70 border border-[#1E293B] text-[11px] font-mono text-slate-400">
+          <span class="text-[#38BDF8] font-bold">&uarr;&darr;</span>
+          <span>Clean Core RFC / Secure Tunnel / MAIF Handshake</span>
+          <div class="flex-1 mx-4 flow-h-connector"></div>
+          <span class="text-emerald-400">Zero Core Mods</span>
+        </div>
+
+        <!-- Tier 3: Enterprise Core (SAP S/4HANA) -->
+        <div class="lan-node p-5" data-node="s4-core" tabindex="0" role="button" aria-label="Inspect Enterprise Core Node">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#1E293B] border border-slate-700 flex items-center justify-center text-[#38BDF8]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono tracking-wider uppercase text-[#38BDF8] font-semibold">Tier 3 &bull; Enterprise Core</span>
+                <h3 class="text-base sm:text-lg font-bold text-white">SAP S/4HANA (On-Prem / Private Cloud)</h3>
+              </div>
+            </div>
+            <span class="node-pulse-indicator w-2.5 h-2.5 rounded-full bg-slate-600 transition-colors mt-1"></span>
+          </div>
+          <p class="mt-3 text-xs text-[#94A3B8] leading-relaxed">
+            Plant Maintenance (PM) &amp; Customer Service (CS) business objects, ABAP RAP services, Mobile Asset Integration Framework (MAIF), and transactional ACID ledger.
+          </p>
+          <div class="mt-4 pt-3 border-t border-[#1E293B] flex items-center justify-between text-[11px] font-mono">
+            <span class="text-slate-300">ABAP RAP &bull; MAIF Engine &bull; CDS</span>
+            <span class="text-emerald-400 font-medium">&check; ACID Committed</span>
+          </div>
+        </div>
+
+        <!-- Flanking Asynchronous Layer: Enterprise AI Agent Layer -->
+        <div class="lan-node p-5 border-emerald-900/60 bg-emerald-950/20 hover:border-emerald-500/60" data-node="ai-supervisor" tabindex="0" role="button" aria-label="Inspect Enterprise AI Supervisor Node">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-emerald-900/40 border border-emerald-700/60 flex items-center justify-center text-emerald-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <span class="text-[10px] font-mono tracking-wider uppercase text-emerald-400 font-semibold">Supervisory Layer &bull; Asynchronous Observer</span>
+                <h3 class="text-base sm:text-lg font-bold text-white">Asynchronous Enterprise AI Layer</h3>
+              </div>
+            </div>
+            <span class="node-pulse-indicator w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse mt-1"></span>
+          </div>
+          <p class="mt-3 text-xs text-slate-300 leading-relaxed">
+            Sits parallel to the sync pipeline, continuously monitoring OData queues and transactional error logs. Automatically classifies locking exceptions, generates idempotency tokens, and executes self-healing retries.
+          </p>
+          <div class="mt-4 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px] font-mono">
+            <span class="text-emerald-300">Kafka Event Stream &bull; Governed LLM</span>
+            <span class="text-emerald-400 font-medium">94.8% Auto-Remediation</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================================================================
+           RIGHT COLUMN: DYNAMIC SIDE INSPECTOR CARD (5 cols on Desktop)
+           ================================================================== -->
+      <div class="lg:col-span-5 sticky top-6">
+        
+        <div class="rounded-xl bg-[#0F172A] border border-[#1E293B] p-6 shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[580px]">
+          
+          <!-- Top Inspector Meta -->
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-[#1E293B]">
+              <span id="inspect-badge" class="px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-sky-950/60 text-[#38BDF8] border border-sky-800/80">
+                Tier 1 &bull; Client Edge
+              </span>
+              <span class="text-[11px] font-mono text-[#94A3B8]">Component Inspector</span>
+            </div>
+
+            <!-- Title & Responsibilities -->
+            <h3 id="inspect-title" class="text-xl font-bold text-white mt-4 tracking-tight">
+              SAP Service and Asset Manager (SSAM)
+            </h3>
+            
+            <div class="mt-4">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8]">Technical Role &amp; Responsibilities:</span>
+              <p id="inspect-responsibilities" class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Native iOS/Android application running compiled MDK metadata with local encrypted SQLite database. Executes work order checklists, dynamic safety hazard assessments, sensor barcoding, and local conflict resolution.
+              </p>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="mt-6">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8]">Core Tech Stack:</span>
+              <div id="inspect-stack" class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded bg-[#151F36] border border-[#1E293B] text-[11px] font-mono text-[#38BDF8]">SAP MDK 23.8+</span>
+                <span class="px-2.5 py-1 rounded bg-[#151F36] border border-[#1E293B] text-[11px] font-mono text-[#38BDF8]">SQLite (AES-256)</span>
+                <span class="px-2.5 py-1 rounded bg-[#151F36] border border-[#1E293B] text-[11px] font-mono text-[#38BDF8]">Dynamic Forms Engine</span>
+                <span class="px-2.5 py-1 rounded bg-[#151F36] border border-[#1E293B] text-[11px] font-mono text-[#38BDF8]">Swift / Kotlin Native</span>
+              </div>
+            </div>
+
+            <!-- Key Reliability Metrics -->
+            <div class="mt-6">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-[#94A3B8]">Reliability &amp; Operational Metrics:</span>
+              <div id="inspect-metrics" class="mt-2 grid grid-cols-2 gap-3 font-mono text-xs">
+                <div class="p-3 rounded-lg bg-[#151F36] border border-[#1E293B]">
+                  <span class="text-[10px] text-[#94A3B8] block">Offline Availability</span>
+                  <span class="text-sm font-bold text-emerald-400 mt-0.5 block">100% Native</span>
+                </div>
+                <div class="p-3 rounded-lg bg-[#151F36] border border-[#1E293B]">
+                  <span class="text-[10px] text-[#94A3B8] block">Field Data Loss</span>
+                  <span class="text-sm font-bold text-white mt-0.5 block">0 Transactions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Diagnostic Console / Simulation Stream -->
+          <div class="mt-6 pt-4 border-t border-[#1E293B]">
+            <div class="flex items-center justify-between text-[11px] font-mono text-[#94A3B8] mb-2">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Active Telemetry Feed</span>
+              </div>
+              <span id="inspect-protocol-label" class="text-[#38BDF8]">OData v4 Batch Protocol</span>
+            </div>
+            
+            <pre id="inspect-console" class="p-3 rounded-lg bg-[#020617] border border-[#1E293B] text-[11px] font-mono text-slate-300 leading-relaxed overflow-x-auto max-h-[140px] whitespace-pre-wrap">
+[SYSTEM_IDLE] Ready for pipeline inspection.
+Click any node to view real-time architectural parameters or click "Simulate Pipeline Sync" to run an automated delta batch test.</pre>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Scoped Component JavaScript -->
+    <script>
+      (function() {
+        const nodes = document.querySelectorAll('#lan-architecture-system .lan-node');
+        const inspectBadge = document.getElementById('inspect-badge');
+        const inspectTitle = document.getElementById('inspect-title');
+        const inspectResponsibilities = document.getElementById('inspect-responsibilities');
+        const inspectStack = document.getElementById('inspect-stack');
+        const inspectMetrics = document.getElementById('inspect-metrics');
+        const inspectProtocolLabel = document.getElementById('inspect-protocol-label');
+        const inspectConsole = document.getElementById('inspect-console');
+        const simBtn = document.getElementById('btn-flow-simulation');
+        const simBtnLabel = document.getElementById('simulation-btn-label');
+
+        // Node Architectural Specifications Data
+        const architectureData = {
+          'ssam-edge': {
+            badge: 'Tier 1 &bull; Client Edge',
+            badgeClass: 'bg-sky-950/60 text-[#38BDF8] border-sky-800/80',
+            title: 'SAP SSAM & FSM Mobile Client',
+            responsibilities: 'Native iOS/Android application executing field maintenance workflows and Field Service Management (FSM). Stores full asset hierarchy in an encrypted local SQLite database, records telemetry readings, validates dynamic forms offline, and stages delta change sets.',
+            stack: ['SAP SSAM 2405', 'SAP FSM', 'SAP MDK 23.8+', 'SQLite (AES-256)', 'Dynamic Forms Engine', 'Swift / Kotlin'],
+            metrics: [
+              { label: 'Offline Availability', value: '100% Native', color: 'text-emerald-400' },
+              { label: 'Field Data Loss', value: '0 Transactions', color: 'text-white' }
+            ],
+            protocol: 'MDK Delta Token Store',
+            payloadLog: '[CLIENT_EDGE] SQLite offline cache verified.\n[CLIENT_EDGE] Delta Queue: 0 Pending conflicts.\n[CLIENT_EDGE] Dynamic Forms Engine: Verified 4 completed inspection checklists.'
+          },
+          'btp-middleware': {
+            badge: 'Tier 2 &bull; Integration & Middleware',
+            badgeClass: 'bg-sky-950/60 text-[#38BDF8] border-sky-800/80',
+            title: 'SAP BTP, Integration Suite & CAP Microservices',
+            responsibilities: 'Cloud integration layer managing mobile delta sync computation, SAP Integration Suite pipelines, CAP microservices, token authentication (OAuth 2.0 PKCE), and reverse proxying payloads into on-premise private VPCs via SAP Cloud Connector.',
+            stack: ['SAP BTP', 'Integration Suite (CPI)', 'SAP CAP (Node/Java)', 'SAP Cloud Connector', 'OData v2 / v4', 'OAuth 2.0 PKCE'],
+            metrics: [
+              { label: 'Gateway Latency (p99)', value: '42ms Tunnel', color: 'text-[#38BDF8]' },
+              { label: 'Batch Throughput', value: '12,000 req/sec', color: 'text-white' }
+            ],
+            protocol: 'CAP & OData v4 Batch Stream',
+            payloadLog: '[BTP_GATEWAY] Cloud Connector reverse proxy established.\n[BTP_GATEWAY] CAP microservice authenticated via OAuth PKCE.\n[BTP_GATEWAY] Mutual TLS (mTLS) handshake verified.'
+          },
+          's4-core': {
+            badge: 'Tier 3 &bull; Enterprise Core',
+            badgeClass: 'bg-sky-950/60 text-[#38BDF8] border-sky-800/80',
+            title: 'SAP S/4HANA Core & ABAP RAP Services',
+            responsibilities: 'Clean Core system of record executing Plant Maintenance (PM) and Customer Service (CS) work orders. Exposes modern ABAP RESTful Application Programming (RAP) endpoints, draft-handling business objects, and Core Data Services (CDS).',
+            stack: ['SAP S/4HANA (2020-2023)', 'ABAP RAP Model', 'Draft Handling', 'MAIF Framework', 'CDS Views', 'Clean Core'],
+            metrics: [
+              { label: 'Core Modification', value: '0% Clean Core', color: 'text-emerald-400' },
+              { label: 'ACID Transaction Lock', value: '18ms Commit', color: 'text-white' }
+            ],
+            protocol: 'ABAP RAP / CDS Views',
+            payloadLog: '[S4_CORE] BAPI_ALM_ORDER_MAINTAIN executed.\n[S4_CORE] ABAP RAP draft committed to active state.\n[S4_CORE] Status: 0200 (Active Maintenance Release).'
+          },
+          'ai-supervisor': {
+            badge: 'Supervisory Layer &bull; Asynchronous Observer',
+            badgeClass: 'bg-emerald-950/60 text-emerald-300 border-emerald-800/80',
+            title: 'Asynchronous Enterprise AI Agent Layer',
+            responsibilities: 'Operates parallel to the synchronization pipeline. Ingests Kafka and SAP Event Mesh transaction logs, intercepts OData 400/409 lock conflicts, derives automated backoff retry strategies with idempotency keys, and synthesizes sensor diagnostics.',
+            stack: ['Kafka Event Ingestion', 'Governed LLM Orchestration', 'SAP Event Mesh', 'Autonomous Recovery Engine', 'Private Enterprise Enclave'],
+            metrics: [
+              { label: 'Auto-Remediation Rate', value: '94.8% Success', color: 'text-emerald-400' },
+              { label: 'Avg Recovery Time', value: '< 2.4 Seconds', color: 'text-emerald-300' }
+            ],
+            protocol: 'Async Telemetry Ingestion',
+            payloadLog: '[AI_AGENT] Event listener watching Kafka topic: sap.mobile.sync.failures\n[AI_AGENT] Lock exception intercepted: Order #481920\n[AI_AGENT] Idempotency key generated. Auto-remediation dispatched.'
+          }
+        };
+
+        // Render Inspector Pane
+        function renderNodeInspection(nodeKey) {
+          const data = architectureData[nodeKey];
+          if (!data) return;
+
+          // Update active CSS state
+          nodes.forEach(n => {
+            if (n.getAttribute('data-node') === nodeKey) {
+              n.classList.add('active-node');
+            } else {
+              n.classList.remove('active-node');
+            }
+          });
+
+          // Update texts and badges
+          inspectBadge.innerHTML = data.badge;
+          inspectBadge.className = `px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold border ${data.badgeClass}`;
+          inspectTitle.textContent = data.title;
+          inspectResponsibilities.textContent = data.responsibilities;
+          inspectProtocolLabel.textContent = data.protocol;
+          inspectConsole.textContent = data.payloadLog;
+
+          // Render Tech Stack Badges
+          inspectStack.innerHTML = data.stack.map(item => 
+            `<span class="px-2.5 py-1 rounded bg-[#151F36] border border-[#1E293B] text-[11px] font-mono text-[#38BDF8]">${item}</span>`
+          ).join('');
+
+          // Render Metrics Cards
+          inspectMetrics.innerHTML = data.metrics.map(metric => 
+            `<div class="p-3 rounded-lg bg-[#151F36] border border-[#1E293B]">
+              <span class="text-[10px] text-[#94A3B8] block">${metric.label}</span>
+              <span class="text-sm font-bold ${metric.color} mt-0.5 block">${metric.value}</span>
+            </div>`
+          ).join('');
+        }
+
+        // Attach Click and Keyboard Listeners to Nodes
+        nodes.forEach(node => {
+          const nodeKey = node.getAttribute('data-node');
+          node.addEventListener('click', () => renderNodeInspection(nodeKey));
+          node.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              renderNodeInspection(nodeKey);
+            }
+          });
+        });
+
+        // Pipeline Flow Simulation Runner
+        if (simBtn) {
+          simBtn.addEventListener('click', () => {
+            simBtn.disabled = true;
+            simBtnLabel.textContent = 'Simulating Sync Flow...';
+            inspectConsole.textContent = '[00:00.00] Simulation initialized: Field technician triggers sync dispatch...';
+
+            const sequence = [
+              { key: 'ssam-edge', time: 700, log: '[00:00.70] SSAM MDK: 4 completed inspection forms packaged into AES-256 delta payload.' },
+              { key: 'btp-middleware', time: 1500, log: '[00:01.50] BTP Mobile Services: Validated OAuth PKCE token. Initiated OData v4 batch tunnel.' },
+              { key: 's4-core', time: 2300, log: '[00:02.30] S/4HANA PM: Concurrency lock detected on WorkOrder #481920 (batch collision).' },
+              { key: 'ai-supervisor', time: 3100, log: '[00:03.10] [AI SUPERVISOR] Caught lock failure. Generated deterministic backoff token.' },
+              { key: 's4-core', time: 3900, log: '[00:03.90] [RESOLVED] S/4HANA ledger committed successfully with zero manual intervention.' }
+            ];
+
+            sequence.forEach(step => {
+              setTimeout(() => {
+                renderNodeInspection(step.key);
+                inspectConsole.textContent += `\n${step.log}`;
+                inspectConsole.scrollTop = inspectConsole.scrollHeight;
+              }, step.time);
+            });
+
+            setTimeout(() => {
+              simBtn.disabled = false;
+              simBtnLabel.textContent = 'Re-Run Pipeline Sync';
+              inspectConsole.textContent += '\n[SUCCESS] Pipeline simulation complete. Zero data loss verified.';
+            }, 4500);
+          });
+        }
+
+      })();
+    </script>
+
+  </div>
+  <!-- ====================================================================
+       END REUSABLE ARCHITECTURE COMPONENT
+       ==================================================================== -->
+
+</body>
+</html>
