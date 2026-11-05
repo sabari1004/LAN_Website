@@ -39,7 +39,7 @@ LAN_New_Web/
 ├── js/
 │   └── main.js                    # Multi-page controllers, telemetry, nav drawer
 ├── services/                      # Dedicated Practice Deep-Dive Pages
-│   ├── sap-mobility.html          # SSAM 2405 & Field Service Management (FSM)
+│   ├── sap-mobility.html          # SSAM & Field Service Management (FSM)
 │   ├── sap-btp.html               # SAP BTP & Clean Core Extensions
 │   ├── sap-cap-rap.html           # Cloud Application Programming (CAP) & ABAP RAP
 │   ├── sap-custom.html            # Custom SAP Apps, Fiori & MDK Modernization
