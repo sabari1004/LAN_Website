@@ -59,7 +59,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=2.4">
+  <link rel="stylesheet" href="styles.css?v=2.5">
 </head>
 <body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
 
@@ -164,7 +164,7 @@
                 <div class="pt-2 mt-auto border-t border-[#1E293B]">
                   <a href="services.html" class="p-2 rounded-lg bg-surface-elevated/50 hover:bg-surface-elevated transition-colors block text-center">
                     <span class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center justify-center gap-1.5">
-                      <span>View All 10 Practice Areas</span>
+                      <span>View All 11 Practice Areas</span>
                       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </span>
                   </a>
@@ -227,6 +227,7 @@
 
       <a href="index.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Home</a>
       <a href="services.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">All Services</a>
+      <a href="services/fractional-clean-core-advisory.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Clean Core &amp; BTP Advisory</a>
       <a href="architecture.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Architecture Flow</a>
       <a href="enterprise-ai.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Applied Enterprise AI</a>
       <a href="blog.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Engineering Insights (Blog)</a>
@@ -372,19 +373,98 @@
       <!-- Practice Category Filter Buttons -->
       <div class="flex flex-wrap items-center justify-center gap-2.5 mb-14">
         <button type="button" class="practice-filter-btn active px-4 py-2 rounded-xl text-xs font-mono font-medium border border-sky-500/60 bg-sky-500/10 text-white transition-all duration-200 shadow-sm" data-filter="all">
-          All Capabilities (8)
+          All Capabilities (11)
         </button>
         <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="sap">
-          Enterprise SAP Practice (4)
+          Enterprise SAP Practice (7)
         </button>
         <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="fullstack">
           Modern Full-Stack &amp; Rapid AI (4)
         </button>
       </div>
 
-      <!-- 8-Card Practice Grid -->
+      <!-- Practice Grid with Spotlight Retainer Card -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="practice-cards-container">
         
+        <!-- ========================================================
+             HIGHLIGHT SPOTLIGHT: Fractional Clean Core & BTP Advisory
+             ======================================================== -->
+        <div id="card-advisory" data-practice="sap" class="practice-card scroll-mt-24 lg:col-span-2 spotlight-card glass-card p-8 sm:p-10 border-2 border-sky-500/50 bg-gradient-to-br from-surface-slate via-surface-elevated to-surface-slate hover:border-sky-400 transition-all duration-300 group relative overflow-hidden shadow-2xl">
+          <div class="radial-glow-accent -top-24 -right-24"></div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div class="lg:col-span-7">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="mono-tag text-[10px] tracking-widest uppercase border-sky-400/40 text-accent-sky-bright bg-sky-500/10">ON-DEMAND L2/L3 SYNDICATE</span>
+                <span class="text-xs font-mono text-emerald-400 font-semibold">&bull; 60-Day Hour Rollover Guarantee</span>
+                <span class="text-xs font-mono text-slate-400">&bull;</span>
+                <span class="text-xs font-mono text-text-muted">Sub-Hour Sev-1 SLA</span>
+              </div>
+
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                <a href="services/fractional-clean-core-advisory.html" class="hover:text-accent-sky-bright transition-colors">
+                  Fractional SAP Clean Core &amp; BTP Advisory
+                </a>
+              </h3>
+
+              <p class="mt-3 text-sm sm:text-base text-text-muted leading-relaxed">
+                Eliminate bloated, idle AMS retainers. Access on-demand Principal SAP Architects for S/4HANA Clean Core extensibility, BTP Integration Suite, CAP/RAP bug triage, and mobile field runtimes. Unused hours roll over for up to 60 days.
+              </p>
+
+              <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">Clean Core Governance</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">BTP Cloud Connector</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">CAP &amp; RAP Triage</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">Quarterly Release Audits</span>
+              </div>
+
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="services/fractional-clean-core-advisory.html" class="btn-primary text-xs uppercase tracking-wider py-3 px-6 inline-flex items-center gap-1.5 group/btn">
+                  <span>Explore Advisory Syndicate &amp; Pricing</span>
+                  <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+                <a href="services/fractional-clean-core-advisory.html#comparison" class="btn-secondary text-xs uppercase tracking-wider py-3 px-6">
+                  AMS vs. Syndicate Model
+                </a>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-[#090D16] p-6 rounded-xl border border-border-slate shadow-xl font-mono text-xs">
+              <div class="text-[11px] text-text-muted uppercase tracking-wider pb-3 border-b border-border-slate flex items-center justify-between">
+                <span>RETAINER SPECIFICATION</span>
+                <span class="text-emerald-400 font-semibold">ACTIVE SYNDICATE</span>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Entry Retainer:</span>
+                  <span class="text-white font-bold">$3,500 / mo (15 hrs)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Effective Rate:</span>
+                  <span class="text-emerald-400 font-bold">$210 – $233 / hr</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Unused Hours:</span>
+                  <span class="text-emerald-400 font-bold">60-Day Rollover Bank</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Sev-1 SLA:</span>
+                  <span class="text-white font-bold">&lt; 1-Hour Response</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Architect Grade:</span>
+                  <span class="text-sky-400 font-bold">100% Principal Talent</span>
+                </div>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-border-slate/60 text-[11px] text-slate-400 leading-relaxed">
+                &check; No multi-year contracts &bull; Zero junior learning curves &bull; Direct ITSM integration
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ========================================================
              PILLAR 1 (SAP): Enterprise Mobility (SSAM & FSM)
              ======================================================== -->
@@ -1256,6 +1336,7 @@
           <!-- SAP Pillar Links -->
           <div class="flex flex-col gap-2">
             <span class="text-[11px] uppercase tracking-wider text-sky-400 font-semibold">SAP Clean Core &amp; EAM</span>
+            <a href="services/fractional-clean-core-advisory.html" class="hover:text-white transition-colors">Clean Core &amp; BTP Advisory (On-Demand L2/L3)</a>
             <a href="services/sap-mobility.html" class="hover:text-white transition-colors">SSAM &amp; FSM Mobility</a>
             <a href="services/sap-eam.html" class="hover:text-white transition-colors">EAM &amp; Phase Model</a>
             <a href="services/sap-ehsm.html" class="hover:text-white transition-colors">EHSM Safety Operations</a>
@@ -1305,6 +1386,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2.4"></script>
+  <script src="js/main.js?v=2.5"></script>
 </body>
 </html>

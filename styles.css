@@ -1162,3 +1162,52 @@ html.light .prose img {
 html.light .prose hr {
   border-top-color: #E2E8F0 !important;
 }
+
+/* ==========================================================================
+   Advisory Syndicate & Retainer Pricing Tokens (Dark & Light Mode)
+   ========================================================================== */
+html.light .billing-toggle.active {
+  background-color: #0284C7 !important;
+  color: #FFFFFF !important;
+}
+
+html.light .billing-toggle:not(.active) {
+  color: #64748B !important;
+}
+
+html.light .billing-toggle:not(.active):hover {
+  color: #0F172A !important;
+}
+
+html.light th.text-rose-400\/90 {
+  color: #BE123C !important;
+  background-color: rgba(244, 63, 94, 0.08) !important;
+}
+
+html.light th.text-sky-400 {
+  color: #0284C7 !important;
+  background-color: rgba(2, 132, 199, 0.08) !important;
+}
+
+html.light td.bg-rose-950\/5 {
+  background-color: rgba(244, 63, 94, 0.03) !important;
+}
+
+html.light td.bg-sky-950\/10 {
+  background-color: rgba(2, 132, 199, 0.05) !important;
+}
+
+html.light .bg-rose-950\/10 {
+  background-color: rgba(244, 63, 94, 0.05) !important;
+  border-color: rgba(244, 63, 94, 0.25) !important;
+}
+
+html.light .bg-sky-950\/20 {
+  background-color: rgba(2, 132, 199, 0.06) !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+
+html.light .bg-emerald-950\/20 {
+  background-color: rgba(16, 185, 129, 0.06) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
