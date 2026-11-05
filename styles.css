@@ -372,3 +372,15 @@ body {
 .packet-active {
   animation: pulse-ring 0.6s ease-out;
 }
+
+/* Breadcrumb and Multi-Page Table Styles */
+.breadcrumb-link {
+  transition: color 0.2s ease;
+}
+.breadcrumb-link:hover {
+  color: #38BDF8;
+}
+
+table tr:hover td {
+  background-color: rgba(30, 41, 59, 0.4);
+}

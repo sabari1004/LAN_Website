@@ -1,16 +1,18 @@
 /**
  * LAN Innovations - Enterprise Frontend Controller
+ * Multi-page architecture support:
  * - Responsive mobile navigation drawer
- * - Smooth scroll with IntersectionObserver active nav link tracking
+ * - Multi-page active navigation link state & smooth anchor scrolling
  * - Interactive Enterprise Architecture Flowchart & Live Telemetry Inspector
  * - Cursor-tracking spotlight cards
- * - Consultation form handler
+ * - Practice category filter controllers
+ * - Consultation form mailto generator
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeaderScroll();
-  initActiveNavScroll();
+  initMultiPageNav();
   initPracticeFilters();
   initSpotlightCards();
   initArchitectureFlowchart();
@@ -88,59 +90,73 @@ function initHeaderScroll() {
 }
 
 /**
- * Smooth Scroll with Active Link Tracking via IntersectionObserver
+ * Multi-Page Active Link Tracking & Local Anchor Smooth Scroll
  */
-function initActiveNavScroll() {
+function initMultiPageNav() {
   const header = document.getElementById('main-header');
   const headerOffset = header ? header.offsetHeight : 70;
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
+  const currentPath = window.location.pathname;
+  const pageName = currentPath.split('/').pop() || 'index.html';
+  const isSubdir = currentPath.includes('/services/');
 
-  // Smooth click scroll
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Highlight active link based on current page
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const cleanHref = href.replace('../', '').split('#')[0];
+
+    if (
+      (cleanHref === 'services.html' && (pageName === 'services.html' || isSubdir)) ||
+      (cleanHref === 'architecture.html' && pageName === 'architecture.html') ||
+      (cleanHref === 'enterprise-ai.html' && pageName === 'enterprise-ai.html') ||
+      (cleanHref === 'about.html' && pageName === 'about.html') ||
+      (cleanHref === 'contact.html' && pageName === 'contact.html') ||
+      ((cleanHref === 'index.html' || cleanHref === '') && (pageName === 'index.html' || pageName === ''))
+    ) {
+      link.classList.add('active');
+    }
+  });
+
+  // Smooth scroll for local in-page hash anchors
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
+      if (!targetId || targetId === '#') return;
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      try {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      } catch (err) {
+        // Fallback for invalid selector
       }
     });
   });
 
-  // Active Link Observer
-  if ('IntersectionObserver' in window && sections.length > 0) {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -60% 0px',
-      threshold: 0
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const currentId = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === `#${currentId}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
+  // If page loaded with a hash anchor, scroll to it with header offset
+  if (window.location.hash) {
+    setTimeout(() => {
+      try {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
           });
         }
-      });
-    }, observerOptions);
-
-    sections.forEach(section => sectionObserver.observe(section));
+      } catch (e) {}
+    }, 150);
   }
 }
 

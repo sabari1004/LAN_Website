@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Practice Areas &bull; Enterprise SAP &amp; Full-Stack AI | LAN Innovations</title>
+  <meta name="description" content="Explore LAN Innovations core practice areas: Enterprise SAP Mobility (SSAM/FSM), BTP Clean Core, Modern CAP &amp; RAP, Web Development, Vibe Coding, Native Mobile, and Agentic AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark-slate': '#0B0F19',
+            'surface-slate': '#0F172A',
+            'surface-elevated': '#151F36',
+            'border-slate': '#1E293B',
+            'border-subtle': '#334155',
+            'accent-sky': '#0284C7',
+            'accent-sky-bright': '#38BDF8',
+            'accent-emerald': '#10B981',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            'glow-sky': '0 0 35px -5px rgba(2, 132, 199, 0.45)',
+            'glow-emerald': '0 0 25px -4px rgba(16, 185, 129, 0.35)',
+            'card-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.6)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
+
+<!-- Top Ambient Glow & Grid -->
+  <div class="radial-glow-hero absolute inset-x-0 top-0 h-[760px] pointer-events-none z-0"></div>
+  <div class="bg-grid-mesh absolute inset-x-0 top-0 h-[760px] pointer-events-none z-0"></div>
+
+  <!-- Header / Sticky Navigation -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-nav border-b border-border-slate/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="LAN Innovations Home">
+        <img src="assets/logo.svg" alt="LAN Innovations Logo" class="w-8 h-8 transition-transform duration-300 group-hover:scale-105">
+        <div class="flex flex-col">
+          <span class="font-bold text-base tracking-tight text-white flex items-center gap-1.5">
+            LAN <span class="text-accent-sky-bright font-medium">Innovations</span>
+          </span>
+          <span class="text-[10px] tracking-wider uppercase text-text-muted font-mono font-medium -mt-0.5">Enterprise SAP &bull; Full-Stack &bull; AI Engineering</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link hover:text-white transition-colors duration-200">Home</a>
+
+        <!-- Services Mega Dropdown Menu -->
+        <div class="relative group">
+          <a href="services.html" class="nav-link active flex items-center gap-1.5 hover:text-white transition-colors duration-200 py-2 focus:outline-none" aria-haspopup="true">
+            <span>Practice Areas</span>
+            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <!-- Mega Dropdown: 2 Distinct Pillars -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[680px] opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+            <div class="rounded-2xl bg-[#0F172A] border border-[#1E293B] shadow-2xl p-5 backdrop-blur-2xl grid grid-cols-2 gap-6">
+              
+              <!-- Column 1: Enterprise SAP Practice -->
+              <div class="flex flex-col gap-1.5 border-r border-[#1E293B] pr-4">
+                <div class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-semibold mb-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                  Enterprise SAP &amp; Clean Core
+                </div>
+                
+                <a href="services/sap-mobility.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-[#38BDF8]">SAP Mobility &amp; FSM</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">SSAM 2405, offline forms &amp; dispatcher scheduling</p>
+                </a>
+
+                <a href="services/sap-btp.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-[#38BDF8]">SAP BTP &amp; Clean Core</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">Integration Suite, Cloud Connector &amp; decoupled APIs</p>
+                </a>
+
+                <a href="services/sap-cap-rap.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-[#38BDF8]">Modern CAP &amp; RAP Services</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">Node/Java CAP models, draft objects &amp; ABAP RAP</p>
+                </a>
+
+                <a href="services/sap-custom.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-[#38BDF8]">Custom SAP Apps &amp; Migration</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">Fiori Elements, custom MDK &amp; Agentry migration</p>
+                </a>
+
+                <div class="pt-2 border-t border-[#1E293B]/60 mt-1">
+                  <a href="services.html" class="text-xs text-sky-400 font-semibold hover:underline flex items-center gap-1">
+                    All SAP Services &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <!-- Column 2: Modern Full-Stack & Rapid AI Engineering -->
+              <div class="flex flex-col gap-1.5 pl-1">
+                <div class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-semibold mb-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Full-Stack &amp; Rapid AI
+                </div>
+
+                <a href="services/web-development.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-emerald-400">Modern Web Application Dev</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">React, Next.js, TypeScript &amp; high-throughput Fastify</p>
+                </a>
+
+                <a href="services/vibe-coding.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-emerald-400">Vibe Coding &amp; Accelerated Dev</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">Antigravity IDE, spec-driven dev &amp; 3x-5x velocity</p>
+                </a>
+
+                <a href="services/mobile-apps.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-emerald-400">Native &amp; Cross-Platform Mobile</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">iOS Swift/SwiftUI, Kotlin &amp; offline SQLite/Room</p>
+                </a>
+
+                <a href="services/agentic-ai.html" class="p-2 rounded-lg hover:bg-[#1E293B] transition-colors group/item block">
+                  <div class="text-xs font-semibold text-white group-hover/item:text-emerald-400">Agentic AI &amp; Automation</div>
+                  <p class="text-[11px] text-text-muted mt-0.5">Multi-agent pipelines, MCP tool-calling &amp; self-healing</p>
+                </a>
+
+                <div class="pt-2 border-t border-[#1E293B]/60 mt-1">
+                  <a href="services.html" class="text-xs text-emerald-400 font-semibold hover:underline flex items-center gap-1">
+                    All Full-Stack Services &rarr;
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <a href="architecture.html" class="nav-link hover:text-white transition-colors duration-200">Architecture</a>
+        <a href="enterprise-ai.html" class="nav-link hover:text-white transition-colors duration-200">Applied AI</a>
+        <a href="about.html" class="nav-link hover:text-white transition-colors duration-200">About</a>
+        <a href="contact.html" class="nav-link hover:text-white transition-colors duration-200">Contact</a>
+      </nav>
+
+      <!-- Right CTAs & Live Status -->
+      <div class="hidden md:flex items-center gap-4">
+        <div class="status-pill" title="Telemetry Status">
+          <span class="status-dot-pulse"></span>
+          <span class="font-mono text-xs text-emerald-400">Enterprise Ready</span>
+        </div>
+        <a href="contact.html" class="btn-primary text-xs uppercase tracking-wider py-2 px-3.5">
+          Schedule Consultation
+        </a>
+      </div>
+
+      <!-- Mobile Menu Hamburger Button -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+<!-- Mobile Menu Drawer & Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-slate/95 backdrop-blur-2xl hidden transition-all duration-300 md:hidden flex flex-col justify-between p-6 pt-24 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex flex-col gap-4 text-sm font-medium text-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b border-border-slate">
+        <span class="text-xs uppercase tracking-widest text-text-muted font-mono">Navigation</span>
+        <button id="mobile-menu-close" type="button" class="text-slate-400 hover:text-white p-1" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <a href="index.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1">Home Overview</a>
+      <a href="services.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1 font-semibold text-white">All Practice Areas Hub</a>
+
+      <!-- Group 1: SAP Practice -->
+      <div class="text-[11px] font-mono uppercase tracking-wider text-sky-400 font-semibold pt-2 border-t border-border-slate/60">Enterprise SAP &amp; Clean Core</div>
+      <a href="services/sap-mobility.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1 flex items-center justify-between pl-2">
+        <span>SAP Mobility &amp; FSM</span>
+        <span class="text-xs font-mono text-slate-400">SSAM</span>
+      </a>
+      <a href="services/sap-btp.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1 flex items-center justify-between pl-2">
+        <span>SAP BTP &amp; Clean Core</span>
+        <span class="text-xs font-mono text-slate-400">Extensions</span>
+      </a>
+      <a href="services/sap-cap-rap.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1 flex items-center justify-between pl-2">
+        <span>BTP, CAP &amp; RAP Services</span>
+        <span class="text-xs font-mono text-slate-400">Modern ABAP</span>
+      </a>
+      <a href="services/sap-custom.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1 flex items-center justify-between pl-2">
+        <span>Custom SAP Apps &amp; Migration</span>
+        <span class="text-xs font-mono text-slate-400">Fiori / MDK</span>
+      </a>
+
+      <!-- Group 2: Modern Full-Stack & Rapid AI -->
+      <div class="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold pt-2 border-t border-border-slate/60">Full-Stack &amp; AI Engineering</div>
+      <a href="services/web-development.html" class="mobile-nav-link hover:text-emerald-400 transition-colors py-1 flex items-center justify-between pl-2">
+        <span>Modern Web App Development</span>
+        <span class="text-xs font-mono text-slate-400">Next.js/React</span>
+      </a>
+      <a href="services/vibe-coding.html" class="mobile-nav-link hover:text-emerald-400 transition-colors py-1 flex items-center justify-between pl-2">
+        <span>Vibe Coding &amp; Accelerated Dev</span>
+        <span class="text-xs font-mono text-slate-400">Velocity</span>
+      </a>
+      <a href="services/mobile-apps.html" class="mobile-nav-link hover:text-emerald-400 transition-colors py-1 flex items-center justify-between pl-2">
+        <span>Native Mobile Engineering</span>
+        <span class="text-xs font-mono text-slate-400">iOS / Android</span>
+      </a>
+      <a href="services/agentic-ai.html" class="mobile-nav-link hover:text-emerald-400 transition-colors py-1 flex items-center justify-between pl-2">
+        <span>Agentic AI &amp; Automation</span>
+        <span class="text-xs font-mono text-emerald-400">MCP Agents</span>
+      </a>
+
+      <div class="pt-3 border-t border-border-slate/60 flex flex-col gap-2">
+        <a href="architecture.html" class="mobile-nav-link text-accent-sky-bright font-semibold py-1">Architecture Pipeline</a>
+        <a href="enterprise-ai.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1">Applied Enterprise AI</a>
+        <a href="about.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1">About LAN Innovations</a>
+        <a href="contact.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1">Contact &amp; Review</a>
+      </div>
+    </div>
+    
+    <div class="pt-5 border-t border-border-slate mt-4">
+      <a href="contact.html" class="mobile-nav-link btn-primary w-full text-center py-2.5 text-sm">
+        Schedule Consultation
+      </a>
+    </div>
+  </div>
+
+  <main class="relative z-10 pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 mb-8" aria-label="Breadcrumb">
+        <a href="index.html" class="hover:text-accent-sky-bright transition-colors">Home</a>
+        <span class="text-slate-600">/</span>
+        <span class="text-white font-semibold">Practice Areas Directory</span>
+      </nav>
+
+      <!-- Services Grid & Filter Section from original content -->
+      <section id="services" class="scroll-mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-border-slate/50">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs uppercase font-mono tracking-widest text-accent-sky-bright">Strategic Practice Pillars</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Enterprise SAP &amp; Modern Full-Stack AI</h2>
+        <p class="mt-4 text-text-muted text-sm sm:text-base leading-relaxed">
+          Bridging deep SAP enterprise core systems with high-velocity modern software engineering, AI-accelerated workflows, and autonomous agentic pipelines.
+        </p>
+      </div>
+
+      <!-- Practice Category Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2.5 mb-14">
+        <button type="button" class="practice-filter-btn active px-4 py-2 rounded-xl text-xs font-mono font-medium border border-sky-500/60 bg-sky-500/10 text-white transition-all duration-200 shadow-sm" data-filter="all">
+          All Capabilities (8)
+        </button>
+        <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="sap">
+          Enterprise SAP Practice (4)
+        </button>
+        <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="fullstack">
+          Modern Full-Stack &amp; Rapid AI (4)
+        </button>
+      </div>
+
+      <!-- 8-Card Practice Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="practice-cards-container">
+        
+        <!-- ========================================================
+             PILLAR 1 (SAP): Enterprise Mobility (SSAM & FSM)
+             ======================================================== -->
+        <div id="card-mobility" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP Field Execution</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Enterprise Mobility (SSAM &amp; FSM)</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">Offline field operations, scheduling, dynamic forms &amp; asset tracking</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We deliver mission-critical field mobility architectures for global utilities, manufacturing, oil &amp; gas, and heavy industry.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">End-to-End Implementation &amp; Version Upgrades:</strong> Turnkey deployments of SAP Service and Asset Manager (SSAM 2310/2405) with offline delta sync tuning.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Dispatcher &amp; Field Service Management (FSM):</strong> Technician scheduling boards, real-time dispatch, route optimization, and time/material capture.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Dynamic Smart Forms &amp; Checklists:</strong> Complex multi-tier safety checklists, conditional branching, photo annotation, and barcode scanning.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">MAIF &amp; Custom MDK Rules:</strong> Custom Mobile Asset Integration Framework filtering, telemetry hooks, and metadata-driven UI rules.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SSAM 2405</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SAP FSM</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">MDK SDK</span>
+            </div>
+            <a href="services/sap-mobility.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 2 (SAP): SAP BTP & Clean Core Extensions
+             ======================================================== -->
+        <div id="card-btp" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP Cloud Platform</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">SAP BTP &amp; Clean Core Extensions</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">Integration Suite, destination management &amp; decoupled architectures</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              Preserve your digital core for zero-friction S/4HANA upgrades with side-by-side extensibility on SAP Business Technology Platform.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Clean Core Strategy Alignment:</strong> Decoupled side-by-side architectures eliminating bespoke core ABAP modifications in S/4HANA.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">SAP Integration Suite (CPI):</strong> Cloud integration flows, enterprise API management, message queuing, and event-driven architectures.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">BTP Mobile Services:</strong> Scalable enterprise mobile proxy, offline delta token cache, and secure principal propagation.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Cloud Connector &amp; VPC Security:</strong> Hardened reverse-proxy tunnels connecting private on-premise S/4HANA instances to BTP multi-cloud.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Integration Suite</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Cloud Connector</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">BTP Kyma/CF</span>
+            </div>
+            <a href="services/sap-btp.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 3 (SAP): Cloud & Modern Development (CAP & RAP)
+             ======================================================== -->
+        <div id="card-cap-rap" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase">Modern SAP Paradigms</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Cloud &amp; Modern Development (CAP &amp; RAP)</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">Standardized enterprise APIs, CDS data models &amp; draft-handling</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              Build high-performance, future-proof enterprise services using modern SAP programming paradigms tailored for cloud scale.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">SAP Cloud Application Programming (CAP):</strong> Microservices built on Node.js/Java with Core Data Services (CDS), multitenancy, and eventing.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">ABAP RESTful Application Programming (RAP):</strong> Modern in-app and side-by-side transactional OData v2/v4 services and CDS view hierarchies.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Draft-Enabled Business Objects:</strong> State management, transactional locking, field validations, and automated rollback lifecycles.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Automated CI/CD &amp; Testing:</strong> Continuous integration pipelines, automated CDS metadata schema validation, and ABAP unit test suites.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SAP CAP</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">ABAP RAP</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">CDS Views</span>
+            </div>
+            <a href="services/sap-cap-rap.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 4 (SAP): Custom SAP App Development & Modernization
+             ======================================================== -->
+        <div id="card-custom" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP UI Modernization</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Custom SAP App Development &amp; Modernization</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">Bespoke Fiori Elements, custom MDK mobile apps &amp; legacy migration</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              Modernize clunky legacy SAP user interfaces into intuitive, high-adoption enterprise web and mobile experiences.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Tailored SAP Fiori &amp; SAPUI5:</strong> Responsive Fiori launchpad applications, custom UI5 controls, and Fiori Elements flexible programming models.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Custom SAP MDK Mobile Clients:</strong> Cross-platform iOS and Android native apps built on SAP Mobile Development Kit for bespoke operations.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Legacy Agentry to S/4HANA Modernization:</strong> Proven migration paths replacing Syclo, SAP Work Manager, and ECC z-transactions with modern SSAM.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">MDM Governance &amp; Deployment:</strong> Microsoft Intune app protection policies, Apple Business Manager (ABM), and zero-touch enterprise rollout.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SAPUI5</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Custom MDK</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Agentry Migration</span>
+            </div>
+            <a href="services/sap-custom.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 5 (FULL-STACK): Modern Web Application Development
+             ======================================================== -->
+        <div id="card-web" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-emerald group-hover:border-emerald-400 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-emerald-400 border-emerald-800">Cloud-Native Frontends</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Modern Web Application Development</h3>
+            <p class="mt-2 text-sm text-emerald-400 font-medium">React, Next.js, TypeScript &amp; resilient headless architectures</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We design and construct production-grade, resilient full-stack web platforms, portals, and cloud-native systems built for enterprise concurrency and fluid user experience.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Cloud-Native Frontends &amp; Full-Stack Systems:</strong> Modern single-page and server-rendered architectures built with React, Next.js, and TypeScript with strict linting and design system tokens.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">High-Throughput API Design:</strong> Extreme-performance microservices and gateways using Fastify, Node.js, GraphQL, and typed REST contracts.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Enterprise Security &amp; Identity:</strong> Hardened OAuth 2.0 / OIDC integrations, RBAC/ABAC authorization models, and secure secrets management.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Micro-Frontend &amp; Headless Architecture:</strong> Decoupled, modular frontend modules enabling zero-downtime canary rollouts and independent domain team releases.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Next.js</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">TypeScript</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Fastify / GraphQL</span>
+            </div>
+            <a href="services/web-development.html" class="text-emerald-400 font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 6 (FULL-STACK): Vibe Coding & AI-Accelerated Engineering
+             ======================================================== -->
+        <div id="card-vibe" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-emerald group-hover:border-emerald-400 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-emerald-400 border-emerald-800">Velocity Amplification</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Vibe Coding &amp; AI-Accelerated Engineering</h3>
+            <p class="mt-2 text-sm text-emerald-400 font-medium">Rapid software prototyping &amp; delivery cycles shrunk from quarters to weeks</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We leverage modern AI coding agents, Antigravity IDE, and LLM-assisted workflows to accelerate software creation without sacrificing production rigor.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Spec-Driven Rapid Prototyping:</strong> Translate complex business requirements into fully interactive, working software prototypes within days rather than months.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Velocity Amplification:</strong> Shrink standard delivery cycles from quarters to weeks utilizing agentic coding frameworks and automated codebase synthesis.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Strict Quality &amp; Typed Contracts:</strong> Enforce zero-compromise engineering standards: end-to-end typed contracts, automated linters, and regression guardrails.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Unit-Tested Pipelines &amp; CI/CD:</strong> Comprehensive test coverage, automated artifact verification, and continuous validation loops powered by Antigravity IDE.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Antigravity IDE</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Spec-Driven Dev</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Weeks-Not-Quarters</span>
+            </div>
+            <a href="services/vibe-coding.html" class="text-emerald-400 font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 7 (FULL-STACK): Native & Cross-Platform Mobile Engineering
+             ======================================================== -->
+        <div id="card-mobile-dev" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-emerald group-hover:border-emerald-400 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-emerald-400 border-emerald-800">Mobile Systems</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Native &amp; Cross-Platform Mobile Engineering</h3>
+            <p class="mt-2 text-sm text-emerald-400 font-medium">Production-grade iOS (Swift / SwiftUI), Android &amp; offline sync engines</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We engineer high-performance mobile applications built for rugged enterprise field environments and smooth consumer experiences alike.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Production-Grade iOS (Swift &amp; SwiftUI):</strong> Fluid, high-performance native iOS applications utilizing the latest Apple APIs, Combine, and modern Swift concurrency.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Offline-Native SQLite &amp; Room Storage:</strong> Hardened local data persistence with conflict-free replication, encrypted stores, and zero field data loss.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Real-Time Background Sync Engines:</strong> Robust background synchronization daemons with automatic reconnect, exponential backoff, and state recovery.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Automated App Store &amp; MDM Pipelines:</strong> Continuous delivery pipelines using Fastlane, TestFlight distribution, Apple Business Manager (ABM), and Intune MDM.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Swift / SwiftUI</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Kotlin / Room</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Offline Sync</span>
+            </div>
+            <a href="services/mobile-apps.html" class="text-emerald-400 font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 8 (FULL-STACK): Agentic AI Development & Automation
+             ======================================================== -->
+        <div id="card-agentic" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-emerald group-hover:border-emerald-400 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.942a2.25 2.25 0 01-1.156.324H6.926c-.416 0-.819-.115-1.156-.324L4.2 15.3m15.6 0A2.25 2.25 0 0021 13.37V9a2.25 2.25 0 00-2.25-2.25h-1.5M4.2 15.3A2.25 2.25 0 013 13.37V9a2.25 2.25 0 012.25-2.25h1.5"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-emerald-400 border-emerald-800">Autonomous Agents</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Agentic AI Development &amp; Automation</h3>
+            <p class="mt-2 text-sm text-emerald-400 font-medium">Autonomous multi-agent pipelines, MCP tool-calling &amp; self-healing workers</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We build production multi-agent systems and background workers that autonomously resolve anomalies, synthesize cross-system data, and augment human teams.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Autonomous Multi-Agent Pipelines:</strong> Specialized cooperating agents utilizing Model Context Protocol (MCP), LangChain/LlamaIndex, and Vertex AI.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Self-Healing Workers &amp; Log Remediation:</strong> Event-driven agents monitoring queues and error streams, executing automated rollback and self-healing fixes.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Multi-System Data Synthesis:</strong> High-speed extraction and semantic summarization across disparate ERP, CRM, and cloud document repositories.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Context-Aware Conversational Copilots:</strong> Secure enterprise chatbots and developer copilots with deterministic role-based tool invocation and data sovereignty.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">MCP Protocol</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Vertex AI</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Multi-Agent</span>
+            </div>
+            <a href="services/agentic-ai.html" class="text-emerald-400 font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================================================================
+         CHAPTER 1: ENTERPRISE SAP PRACTICE PILLARS • DEEP DIVE ARCHITECTURE & CAPABILITIES
+         ============================================================================================== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-6 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-950/60 border border-sky-800 text-sky-400 text-xs font-mono font-medium mb-3">
+        <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+        Enterprise SAP Practice &bull; Technical Specifications &bull; 4 Core Pillars
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+        Enterprise SAP Mobility &amp; Clean Core Deep Dive
+      </h2>
+      <p class="mt-3 text-text-muted text-sm sm:text-base max-w-3xl mx-auto leading-relaxed">
+        Comprehensive architectural specifications, implementation frameworks, and deliverable blueprints across our enterprise SAP mobility and Cloud Application Programming practices.
+      </p>
+    </div>
+
+    <!-- ========================================================
+         ELABORATED SECTION 1: SAP Mobility (SSAM & FSM)
+         ======================================================== -->
+
+      <!-- Enterprise Delivery Methodology Comparison Matrix -->
+      <div class="mt-20">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="mono-tag text-xs">Modern Engineering Model</span>
+          <h2 class="mt-3 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Traditional IT Staffing vs. LAN Innovations Modern Pods
+          </h2>
+          <p class="mt-2 text-text-muted text-sm">
+            How our principal-led, AI-accelerated delivery model outpaces legacy enterprise consulting firms.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-border-slate">
+          <table class="w-full text-left text-xs font-sans border-collapse">
+            <thead>
+              <tr class="bg-surface-elevated/80 border-b border-border-slate text-slate-300 font-mono">
+                <th class="p-4 sm:p-5 uppercase tracking-wider text-[11px]">Engineering Dimension</th>
+                <th class="p-4 sm:p-5 uppercase tracking-wider text-[11px] text-slate-400">Traditional Enterprise IT Consultancies</th>
+                <th class="p-4 sm:p-5 uppercase tracking-wider text-[11px] text-accent-sky-bright bg-sky-950/20">LAN Innovations Engineering Model</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border-slate bg-surface-slate/60 text-slate-300">
+              <tr>
+                <td class="p-4 sm:p-5 font-semibold text-white">Team Composition</td>
+                <td class="p-4 sm:p-5 text-text-muted">1 senior partner selling, 8 junior offshore developers executing</td>
+                <td class="p-4 sm:p-5 text-emerald-400 bg-sky-950/10 font-mono">Principal architects coding directly alongside your team</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-semibold text-white">Clean Core Discipline</td>
+                <td class="p-4 sm:p-5 text-text-muted">Writes bespoke modifications inside S/4HANA core tables</td>
+                <td class="p-4 sm:p-5 text-white bg-sky-950/10 font-mono">100% Decoupled BTP &amp; RAP extensions; zero core modifications</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-semibold text-white">Offline Mobile Sync</td>
+                <td class="p-4 sm:p-5 text-text-muted">Generic sync configs resulting in frequent lockouts &amp; queue drops</td>
+                <td class="p-4 sm:p-5 text-white bg-sky-950/10 font-mono">Deterministic MAIF filter tuning, AES-256 SQLite &amp; sub-second sync</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-semibold text-white">AI &amp; Automation</td>
+                <td class="p-4 sm:p-5 text-text-muted">Superficial slide decks, generic chat wrappers, theoretical PoCs</td>
+                <td class="p-4 sm:p-5 text-white bg-sky-950/10 font-mono">Deterministic agentic supervisors, self-healing sync, MCP tools</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-semibold text-white">Velocity &amp; Delivery</td>
+                <td class="p-4 sm:p-5 text-text-muted">Multi-quarter waterfall timelines with bloated governance</td>
+                <td class="p-4 sm:p-5 text-emerald-400 bg-sky-950/10 font-mono">Working prototypes in 10 days; production delivery in weeks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Consultation CTA Banner -->
+      <div class="mt-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-surface-elevated/90 to-surface-slate/90 border border-sky-500/30 text-center relative overflow-hidden">
+        <div class="radial-glow-accent -top-24 left-1/2 -translate-x-1/2"></div>
+        <div class="relative z-10">
+          <span class="mono-tag text-[10px] tracking-widest uppercase text-accent-sky-bright">Architecture Blueprint</span>
+          <h3 class="mt-3 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Request a Practice Architecture Review</h3>
+          <p class="mt-3 text-text-muted text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Need a technical audit of your SSAM mobile performance, SAP BTP Clean Core architecture, or full-stack software roadmap? We deliver actionable blue-prints in 10 business days.
+          </p>
+          <div class="mt-7 flex flex-wrap justify-center gap-4">
+            <a href="contact.html" class="btn-primary text-xs uppercase tracking-wider py-3 px-6">
+              Book Architecture Review
+            </a>
+            <a href="architecture.html" class="btn-secondary text-xs uppercase tracking-wider py-3 px-6">
+              View Interactive Flowchart
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+<footer class="border-t border-border-slate bg-surface-slate/60 text-text-muted py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-10 border-b border-border-slate/60">
+        <!-- Brand Info -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-3">
+            <img src="assets/logo.svg" alt="LAN Innovations Logo" class="w-6 h-6">
+            <span class="text-base font-bold text-white tracking-tight">LAN Innovations</span>
+          </div>
+          <p class="text-xs text-text-muted max-w-lg mt-1 leading-relaxed">
+            Enterprise SAP mobility and modern full-stack AI engineering consultancy. Delivering offline-native SSAM/FSM applications, Clean Core BTP extensions (CAP &amp; RAP), cloud-native web apps, native mobile systems, and autonomous agentic AI workflows.
+          </p>
+        </div>
+
+        <!-- Navigation Links: 3 Pillars -->
+        <div class="flex flex-col sm:flex-row gap-8 text-xs font-mono">
+          <!-- SAP Pillar Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-sky-400 font-semibold">SAP Clean Core</span>
+            <a href="services/sap-mobility.html" class="hover:text-white transition-colors">SSAM &amp; FSM Mobility</a>
+            <a href="services/sap-btp.html" class="hover:text-white transition-colors">BTP Clean Core</a>
+            <a href="services/sap-cap-rap.html" class="hover:text-white transition-colors">CAP &amp; ABAP RAP</a>
+            <a href="services/sap-custom.html" class="hover:text-white transition-colors">Custom Fiori &amp; MDK</a>
+          </div>
+
+          <!-- Full-Stack & AI Pillar Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold">Full-Stack &amp; AI</span>
+            <a href="services/web-development.html" class="hover:text-white transition-colors">Modern Web Apps</a>
+            <a href="services/vibe-coding.html" class="hover:text-white transition-colors">Vibe Coding &amp; Velocity</a>
+            <a href="services/mobile-apps.html" class="hover:text-white transition-colors">Native iOS &amp; Room</a>
+            <a href="services/agentic-ai.html" class="hover:text-white transition-colors">Agentic AI &amp; MCP</a>
+          </div>
+
+          <!-- Platform & Company Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Company &amp; Lab</span>
+            <a href="services.html" class="hover:text-white transition-colors">All Practice Areas</a>
+            <a href="architecture.html" class="hover:text-white transition-colors">Architecture Flow</a>
+            <a href="enterprise-ai.html" class="hover:text-white transition-colors">Applied AI Layer</a>
+            <a href="about.html" class="hover:text-white transition-colors">About Firm</a>
+            <a href="contact.html" class="hover:text-white transition-colors">Book Architecture Review</a>
+            <a href="mailto:contact@laninnovations.com" class="text-accent-sky-bright hover:underline">contact@laninnovations.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright & Compliance -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+        <div>
+          &copy; 2026 LAN Innovations. All rights reserved. Built for mission-critical enterprise landscapes.
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-[11px]">
+          <span>SAP SSAM &amp; FSM</span>
+          <span>&bull;</span>
+          <span>BTP, CAP &amp; RAP</span>
+          <span>&bull;</span>
+          <span>Next.js &amp; Swift</span>
+          <span>&bull;</span>
+          <span>Vibe Coding &amp; MCP Agents</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
