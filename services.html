@@ -51,7 +51,7 @@
       }
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=2.2">
+  <link rel="stylesheet" href="styles.css?v=2.3">
 </head>
 <body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
 
@@ -85,19 +85,29 @@
           </a>
           
           <!-- Refined Mega Dropdown -->
-          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[580px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
+          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[620px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
             <div class="rounded-xl bg-[#0F172A] border border-[#1E293B] shadow-2xl p-4 backdrop-blur-2xl grid grid-cols-2 gap-4">
               
               <!-- Column 1: SAP Practice -->
               <div class="flex flex-col gap-1 border-r border-[#1E293B] pr-3">
                 <div class="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-semibold px-2 py-1 flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-                  SAP Clean Core
+                  SAP Clean Core &amp; EAM
                 </div>
                 
                 <a href="services/sap-mobility.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
                   <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP Mobility &amp; FSM</div>
                   <p class="text-[11px] text-text-muted">SSAM &amp; offline delta sync</p>
+                </a>
+
+                <a href="services/sap-eam.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EAM &amp; Phase Model</div>
+                  <p class="text-[11px] text-text-muted">9-Phase lifecycle &amp; asset ops</p>
+                </a>
+
+                <a href="services/sap-ehsm.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EHSM &amp; Safety</div>
+                  <p class="text-[11px] text-text-muted">Incidents, risk &amp; permit to work</p>
                 </a>
 
                 <a href="services/sap-btp.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
@@ -142,10 +152,19 @@
                   <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Agentic AI &amp; MCP</div>
                   <p class="text-[11px] text-text-muted">Multi-agent pipelines &amp; self-healing</p>
                 </a>
+
+                <div class="pt-2 mt-auto border-t border-[#1E293B]">
+                  <a href="services.html" class="p-2 rounded-lg bg-surface-elevated/50 hover:bg-surface-elevated transition-colors block text-center">
+                    <span class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center justify-center gap-1.5">
+                      <span>View All 10 Practice Areas</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                  </a>
+                </div>
               </div>
 
             </div>
-          </div>
+          </div></div>
         </div>
 
         <a href="architecture.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Architecture</a>
@@ -235,10 +254,10 @@
       <!-- Practice Category Filter Buttons -->
       <div class="flex flex-wrap items-center justify-center gap-2.5 mb-14">
         <button type="button" class="practice-filter-btn active px-4 py-2 rounded-xl text-xs font-mono font-medium border border-sky-500/60 bg-sky-500/10 text-white transition-all duration-200 shadow-sm" data-filter="all">
-          All Capabilities (8)
+          All Capabilities (10)
         </button>
         <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="sap">
-          Enterprise SAP Practice (4)
+          Enterprise SAP Practice (6)
         </button>
         <button type="button" class="practice-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-filter="fullstack">
           Modern Full-Stack &amp; Rapid AI (4)
@@ -312,8 +331,137 @@
           </div>
         </div>
 
+        
         <!-- ========================================================
-             PILLAR 2 (SAP): SAP BTP & Clean Core Extensions
+             PILLAR 2 (SAP): SAP EAM & 9-Phase Maintenance Model
+             ======================================================== -->
+        <div id="card-eam" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-sky-400 border-sky-800">Asset Operations</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">SAP EAM &amp; Phase Model</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">9-Phase lifecycle governance, planning buckets &amp; APM integration</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We architect modern S/4HANA Enterprise Asset Management centered on the 9-Phase Maintenance Model, establishing auditable stage-gates from anomaly initiation to financial settlement.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">9-Phase Maintenance Model Execution:</strong> Turnkey configuration of S/4HANA Phase/Sub-phase stage-gates across reactive, preventive, and emergency orders.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Fiori Maintenance Planning Buckets:</strong> Automated capacity scheduling, work backlog grouping, and technician calendar leveling.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Reliability &amp; APM Integration:</strong> Failure Mode and Effects Analysis (FMEA), asset health scoring, and dynamic maintenance trigger rules.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">SSAM Mobile Phase Synchronization:</strong> Real-time mobile wrench triggers advancing orders through execution without delta sync latency.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SAP EAM</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">9-Phase Model</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">WCM / LOTO</span>
+            </div>
+            <a href="services/sap-eam.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 3 (SAP): SAP EHSM & Operational Safety
+             ======================================================== -->
+        <div id="card-ehsm" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
+          <div>
+            <!-- Header Icon & Badge -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 rounded-xl bg-surface-elevated border border-border-slate flex items-center justify-center text-accent-sky-bright group-hover:border-accent-sky transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-sky-400 border-sky-800">Operational Safety</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">SAP EHSM &amp; Safety Operations</h3>
+            <p class="mt-2 text-sm text-sky-400 font-medium">Incident management, risk assessment &amp; digital Permit to Work (PTW)</p>
+            <p class="mt-3 text-xs sm:text-sm text-text-muted leading-relaxed">
+              We engineer zero-tolerance industrial safety systems integrating SAP EHSM directly into plant maintenance execution, mobile checklists, and regulatory compliance workflows.
+            </p>
+
+            <!-- Detailed Capabilities Checklist -->
+            <ul class="mt-6 space-y-3 text-xs text-slate-300 font-sans">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Incident Capture &amp; OSHA Regulatory Reporting:</strong> Streamlined injury, illness, and near-miss logging with automated OSHA 300/301 compliance filings.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Workplace Risk &amp; Hierarchy of Controls:</strong> Multi-factor risk scoring matrices embedded into S/4HANA functional locations and equipment.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Electronic Permit to Work (PTW):</strong> Digital Hot Work, Confined Space, and LOTO clearance gates interlocked with work order execution.
+                </div>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-sky-bright mt-0.5 text-sm font-bold">&check;</span>
+                <div>
+                  <strong class="text-white">Management of Change &amp; Emissions:</strong> Multi-disciplinary MOC reviews, PSSR gates, and GHG Scope 1/2 environmental telemetry monitoring.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card Footer & Tags -->
+          <div class="mt-8 pt-5 border-t border-border-slate flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">SAP EHSM</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">Permit to Work</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated text-[11px] text-slate-300 border border-slate-700">OSHA 300/301</span>
+            </div>
+            <a href="services/sap-ehsm.html" class="text-accent-sky-bright font-medium hover:underline flex items-center gap-1">
+              Explore Deep Dive &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             PILLAR 4 (SAP): SAP BTP & Clean Core Extensions
              ======================================================== -->
         <div id="card-btp" data-practice="sap" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-sky-500/50 transition-all duration-300 group">
           <div>
@@ -505,7 +653,7 @@
         </div>
 
         <!-- ========================================================
-             PILLAR 5 (FULL-STACK): Modern Web Application Development
+             PILLAR 7 (FULL-STACK): Modern Web Application Development
              ======================================================== -->
         <div id="card-web" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
           <div>
@@ -570,7 +718,7 @@
         </div>
 
         <!-- ========================================================
-             PILLAR 6 (FULL-STACK): Vibe Coding & AI-Accelerated Engineering
+             PILLAR 8 (FULL-STACK): Vibe Coding & AI-Accelerated Engineering
              ======================================================== -->
         <div id="card-vibe" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
           <div>
@@ -634,7 +782,7 @@
         </div>
 
         <!-- ========================================================
-             PILLAR 7 (FULL-STACK): Native & Cross-Platform Mobile Engineering
+             PILLAR 9 (FULL-STACK): Native & Cross-Platform Mobile Engineering
              ======================================================== -->
         <div id="card-mobile-dev" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
           <div>
@@ -698,7 +846,7 @@
         </div>
 
         <!-- ========================================================
-             PILLAR 8 (FULL-STACK): Agentic AI Development & Automation
+             PILLAR 10 (FULL-STACK): Agentic AI Development & Automation
              ======================================================== -->
         <div id="card-agentic" data-practice="fullstack" class="practice-card scroll-mt-24 spotlight-card glass-card p-7 sm:p-9 flex flex-col justify-between border border-border-slate hover:border-emerald-500/50 transition-all duration-300 group">
           <div>
@@ -878,8 +1026,10 @@
         <div class="flex flex-col sm:flex-row gap-8 text-xs font-mono">
           <!-- SAP Pillar Links -->
           <div class="flex flex-col gap-2">
-            <span class="text-[11px] uppercase tracking-wider text-sky-400 font-semibold">SAP Clean Core</span>
+            <span class="text-[11px] uppercase tracking-wider text-sky-400 font-semibold">SAP Clean Core &amp; EAM</span>
             <a href="services/sap-mobility.html" class="hover:text-white transition-colors">SSAM &amp; FSM Mobility</a>
+            <a href="services/sap-eam.html" class="hover:text-white transition-colors">EAM &amp; Phase Model</a>
+            <a href="services/sap-ehsm.html" class="hover:text-white transition-colors">EHSM Safety Operations</a>
             <a href="services/sap-btp.html" class="hover:text-white transition-colors">BTP Clean Core</a>
             <a href="services/sap-cap-rap.html" class="hover:text-white transition-colors">CAP &amp; ABAP RAP</a>
             <a href="services/sap-custom.html" class="hover:text-white transition-colors">Custom Fiori &amp; MDK</a>
@@ -926,6 +1076,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2.3"></script>
+  <script src="js/main.js?v=2.4"></script>
 </body>
 </html>

@@ -414,15 +414,15 @@ Click any node to view real-time architectural parameters or click "Simulate Pip
           's4-core': {
             badge: 'Tier 3 &bull; Enterprise Core',
             badgeClass: 'bg-sky-950/60 text-[#38BDF8] border-sky-800/80',
-            title: 'SAP S/4HANA Core & ABAP RAP Services',
-            responsibilities: 'Clean Core system of record executing Plant Maintenance (PM) and Customer Service (CS) work orders. Exposes modern ABAP RESTful Application Programming (RAP) endpoints, draft-handling business objects, and Core Data Services (CDS).',
-            stack: ['SAP S/4HANA', 'ABAP RAP Model', 'Draft Handling', 'MAIF Framework', 'CDS Views', 'Clean Core'],
+            title: 'SAP S/4HANA Core, EAM Phase Model & EHSM',
+            responsibilities: 'Clean Core system of record executing Plant Maintenance (PM) and Customer Service (CS) work orders under the 9-Phase Maintenance Model with EHSM Permit to Work (PTW) interlocks. Exposes modern ABAP RESTful Application Programming (RAP) endpoints, draft-handling business objects, and Core Data Services (CDS).',
+            stack: ['SAP S/4HANA', 'EAM 9-Phase Model', 'EHSM Permit to Work', 'ABAP RAP Model', 'Draft Handling', 'MAIF Framework', 'CDS Views', 'Clean Core'],
             metrics: [
               { label: 'Core Modification', value: '0% Clean Core', color: 'text-emerald-400' },
               { label: 'ACID Transaction Lock', value: '18ms Commit', color: 'text-white' }
             ],
             protocol: 'ABAP RAP / CDS Views',
-            payloadLog: '[S4_CORE] BAPI_ALM_ORDER_MAINTAIN executed.\n[S4_CORE] ABAP RAP draft committed to active state.\n[S4_CORE] Status: 0200 (Active Maintenance Release).'
+            payloadLog: '[S4_CORE] BAPI_ALM_ORDER_MAINTAIN executed.\n[S4_CORE] ABAP RAP phase shift committed: Phase 07 (In Execution).\n[S4_CORE] Status: Active Maintenance Execution (ACID locked).'
           },
           'ai-supervisor': {
             badge: 'Supervisory Layer &bull; Asynchronous Observer',

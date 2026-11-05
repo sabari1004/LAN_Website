@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP Environment, Health, and Safety Management (EHSM) | LAN Innovations</title>
+  <meta name="description" content="SAP EHSM (Environment, Health, and Safety Management) - Incident management, risk assessment, electronic Permit to Work (PTW), and environmental emissions compliance by LAN Innovations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark-slate': '#0B0F19',
+            'surface-slate': '#0F172A',
+            'surface-elevated': '#151F36',
+            'border-slate': '#1E293B',
+            'border-subtle': '#334155',
+            'accent-sky': '#0284C7',
+            'accent-sky-bright': '#38BDF8',
+            'accent-emerald': '#10B981',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            'glow-sky': '0 0 35px -5px rgba(2, 132, 199, 0.45)',
+            'glow-emerald': '0 0 25px -4px rgba(16, 185, 129, 0.35)',
+            'card-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.6)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Anti-FOUT Theme Preload Script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('lan-theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css?v=2.3">
+</head>
+<body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
+
+  <!-- Top Ambient Glow & Grid -->
+  <div class="radial-glow-hero absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+  <div class="bg-grid-mesh absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+
+  <!-- Minimalist Header -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 glass-nav border-b border-border-slate/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      
+      <!-- Brand Logo (Single line, clean) -->
+      <a href="../index.html" class="flex items-center gap-2.5 group focus:outline-none whitespace-nowrap" aria-label="LAN Innovations Home">
+        <img src="../assets/logo.svg" alt="LAN Innovations" class="w-7 h-7 transition-transform duration-200 group-hover:scale-105">
+        <span class="font-semibold text-sm tracking-tight text-white flex items-center gap-1">
+          LAN <span class="text-slate-400 font-normal">Innovations</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links (Single line, no wraps) -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-400" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Home</a>
+
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <a href="../services.html" class="nav-link active text-white flex items-center gap-1 px-3 py-1.5 rounded-md hover:text-white transition-colors focus:outline-none whitespace-nowrap" aria-haspopup="true">
+            <span>Services</span>
+            <svg class="w-3 h-3 text-slate-500 group-hover:text-slate-300 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <!-- Refined Mega Dropdown -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[620px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
+            <div class="rounded-xl bg-[#0F172A] border border-[#1E293B] shadow-2xl p-4 backdrop-blur-2xl grid grid-cols-2 gap-4">
+              
+              <!-- Column 1: SAP Practice -->
+              <div class="flex flex-col gap-1 border-r border-[#1E293B] pr-3">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                  SAP Clean Core &amp; EAM
+                </div>
+                
+                <a href="sap-mobility.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP Mobility &amp; FSM</div>
+                  <p class="text-[11px] text-text-muted">SSAM &amp; offline delta sync</p>
+                </a>
+
+                <a href="sap-eam.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EAM &amp; Phase Model</div>
+                  <p class="text-[11px] text-text-muted">9-Phase lifecycle &amp; asset ops</p>
+                </a>
+
+                <a href="sap-ehsm.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EHSM &amp; Safety</div>
+                  <p class="text-[11px] text-text-muted">Incidents, risk &amp; permit to work</p>
+                </a>
+
+                <a href="sap-btp.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP BTP &amp; Clean Core</div>
+                  <p class="text-[11px] text-text-muted">Integration Suite &amp; Cloud Connector</p>
+                </a>
+
+                <a href="sap-cap-rap.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">CAP &amp; ABAP RAP</div>
+                  <p class="text-[11px] text-text-muted">Node/Java CAP &amp; modern ABAP</p>
+                </a>
+
+                <a href="sap-custom.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">Custom SAP Apps</div>
+                  <p class="text-[11px] text-text-muted">Fiori Elements &amp; MDK migration</p>
+                </a>
+              </div>
+
+              <!-- Column 2: Full-Stack & AI -->
+              <div class="flex flex-col gap-1 pl-1">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Full-Stack &amp; AI
+                </div>
+
+                <a href="web-development.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Web App Development</div>
+                  <p class="text-[11px] text-text-muted">React.js, Next.js &amp; Fastify</p>
+                </a>
+
+                <a href="vibe-coding.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Vibe Coding &amp; Velocity</div>
+                  <p class="text-[11px] text-text-muted">Antigravity IDE &amp; rapid delivery</p>
+                </a>
+
+                <a href="mobile-apps.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Native Mobile Apps</div>
+                  <p class="text-[11px] text-text-muted">iOS Swift &amp; Android Room</p>
+                </a>
+
+                <a href="agentic-ai.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Agentic AI &amp; MCP</div>
+                  <p class="text-[11px] text-text-muted">Multi-agent pipelines &amp; self-healing</p>
+                </a>
+
+                <div class="pt-2 mt-auto border-t border-[#1E293B]">
+                  <a href="../services.html" class="p-2 rounded-lg bg-surface-elevated/50 hover:bg-surface-elevated transition-colors block text-center">
+                    <span class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center justify-center gap-1.5">
+                      <span>View All 10 Practice Areas</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div></div>
+        </div>
+
+        <a href="../architecture.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Architecture</a>
+        <a href="../enterprise-ai.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Applied AI</a>
+        <a href="../about.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">About</a>
+        <a href="../contact.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Contact</a>
+      </nav>
+
+      <!-- Right Actions: Minimal Theme Toggle & Compact Button -->
+      <div class="hidden md:flex items-center gap-2">
+        <button type="button" class="theme-toggle-btn w-8 h-8 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated transition-colors flex items-center justify-center focus:outline-none" aria-label="Toggle light and dark mode" title="Toggle theme">
+          <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+
+        <a href="../contact.html" class="btn-primary text-xs font-medium py-1.5 px-3.5 rounded-full whitespace-nowrap">
+          Schedule Review
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer & Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-slate/95 backdrop-blur-2xl hidden transition-all duration-200 md:hidden flex flex-col justify-between p-6 pt-20 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex flex-col gap-3 text-sm font-medium text-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b border-border-slate">
+        <span class="text-xs uppercase tracking-wider text-text-muted font-mono">Navigation</span>
+        <div class="flex items-center gap-2">
+          <button type="button" class="theme-toggle-btn p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors" aria-label="Toggle theme">
+            <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          <button id="mobile-menu-close" type="button" class="text-slate-400 hover:text-white p-1" aria-label="Close menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <a href="../index.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Home</a>
+      <a href="../services.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">All Services</a>
+      <a href="../architecture.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Architecture Flow</a>
+      <a href="../enterprise-ai.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Applied Enterprise AI</a>
+      <a href="../about.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">About Firm</a>
+      <a href="../contact.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Contact</a>
+    </div>
+    
+    <div class="pt-4 border-t border-border-slate mt-4">
+      <a href="../contact.html" class="mobile-nav-link btn-primary w-full text-center py-2 text-xs font-medium rounded-full">
+        Schedule Review
+      </a>
+    </div>
+  </div>
+
+  <main class="relative z-10 pt-20 pb-20">
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-text-muted mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-accent-sky-bright transition-colors">Home</a>
+        <span class="text-slate-600">/</span>
+        <a href="../services.html" class="hover:text-accent-sky-bright transition-colors">Practice Areas</a>
+        <span class="text-slate-600">/</span>
+        <span class="text-white font-semibold">SAP EHSM &amp; Safety</span>
+      </nav>
+
+      <!-- Deep Dive Card Content -->
+      <div class="spotlight-card glass-card p-6 sm:p-10 lg:p-12 border border-border-slate hover:border-sky-500/50 transition-all duration-300">
+        
+        <!-- Header -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-border-slate">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-950/40 border border-sky-800/60 text-accent-sky-bright text-xs font-mono font-medium mb-3">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-sky-bright animate-pulse"></span>
+              SAP Pillar 03 &bull; Operational Safety &amp; Compliance
+            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              SAP Environment, Health, and Safety (EHSM) Operations
+            </h1>
+            <p class="mt-2 text-sky-400 text-sm sm:text-base font-medium">
+              Incident Management, Operational Risk Assessment, Digital Permit to Work (PTW) &amp; Environmental Emissions.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="../contact.html" class="btn-primary text-xs uppercase tracking-wider py-2.5 px-5">
+              Consult EHSM Architects
+            </a>
+          </div>
+        </div>
+
+        <!-- Deep Dive Narrative -->
+        <p class="mt-6 text-sm sm:text-base text-text-muted leading-relaxed">
+          Heavy asset industries operate under strict safety mandates where untracked hazards, delayed incident notifications, and manual paper permits create severe operational risks and legal liabilities. We architect and implement modern <strong class="text-white">SAP Environment, Health, and Safety Management (EHSM)</strong> integrated seamlessly into S/4HANA Plant Maintenance and field execution. By coupling automated OSHA compliance and multi-tier risk matrices with electronic <strong class="text-white">Permit to Work (PTW)</strong> and mobile checklists, our solutions protect frontline field technicians, streamline root-cause investigations, and enforce zero-tolerance safety interlocks before work orders begin.
+        </p>
+
+        <!-- 2-Column Technical Layout: Detailed Capabilities & Code/Specs Manifest -->
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left: 4 Detailed Capabilities Breakdown (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            <h3 class="text-xs font-mono uppercase tracking-widest text-slate-300">Core Engineering Deliverables</h3>
+
+            <!-- Module 1 -->
+            <div class="p-5 rounded-xl bg-surface-slate/80 border border-border-slate">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-white">1. Incident Management &amp; Regulatory Compliance (OSHA / RIDDOR)</span>
+                <span class="mono-tag text-[10px]">Zero-Tolerance Safety</span>
+              </div>
+              <p class="mt-2 text-xs text-text-muted leading-relaxed">
+                Streamlined capture of injuries, illnesses, near-misses, and asset safety observations. Automated root-cause investigation workflows (5-Why, TapRooT, Fishbone), corrective action tracking (CAPA), and automated generation of OSHA 300, 300A, and 301 compliance filings.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">OSHA 300/301 Automation</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">5-Why Root-Cause Trees</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">CAPA Lifecycle Tracking</span>
+              </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="p-5 rounded-xl bg-surface-slate/80 border border-border-slate">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-white">2. Operational Risk Assessment &amp; Hierarchy of Controls</span>
+                <span class="mono-tag text-[10px]">Hazard Scoring</span>
+              </div>
+              <p class="mt-2 text-xs text-text-muted leading-relaxed">
+                Multi-factor risk assessment matrices evaluating likelihood, severity, and exposure frequency. Embeds risk ratings directly onto S/4HANA functional locations and equipment, enforcing the industrial hierarchy of controls (Elimination, Substitution, Engineering, Admin, PPE).
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Risk Matrix Engine</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Hierarchy of Controls</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Asset Hazard Profiles</span>
+              </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="p-5 rounded-xl bg-surface-slate/80 border border-border-slate">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-white">3. Electronic Permit to Work (PTW) &amp; Safe Work Clearances</span>
+                <span class="mono-tag text-[10px]">Permit Governance</span>
+              </div>
+              <p class="mt-2 text-xs text-text-muted leading-relaxed">
+                Digital Permit to Work system managing Hot Work, Confined Space Entry, High-Voltage Switching, and Cold Work. Tightly integrated with S/4HANA Work Clearance Management (WCM) and maintenance orders, preventing technician execution until all permits are electronically counter-signed.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Digital PTW Workflows</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Confined Space / Hot Work</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">WCM Isolation Gates</span>
+              </div>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="p-5 rounded-xl bg-surface-slate/80 border border-border-slate">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-white">4. Management of Change (MOC) &amp; Environmental Emissions</span>
+                <span class="mono-tag text-[10px]">Change &amp; Environment</span>
+              </div>
+              <p class="mt-2 text-xs text-text-muted leading-relaxed">
+                Structured Management of Change (MOC) governance ensuring multi-disciplinary reviews and Pre-Startup Safety Reviews (PSSR) before commissioning modified plant assets. Environmental module calculates greenhouse gas emissions (GHG Scope 1 &amp; 2) and monitors wastewater limits.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2 text-[11px] font-mono text-slate-300">
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">MOC &amp; PSSR Approval</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">GHG Scope 1/2 Tracking</span>
+                <span class="px-2 py-0.5 rounded bg-dark-slate border border-slate-700">Safety Data Sheets (SDS)</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: Architecture Manifest & Spec Table (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- Tech Specs Summary Card -->
+            <div class="p-5 rounded-xl bg-dark-slate/90 border border-border-slate font-mono text-xs">
+              <div class="text-[11px] uppercase tracking-wider text-accent-sky-bright font-semibold pb-3 border-b border-border-slate/60">
+                Technical Specifications &bull; Safety Tier
+              </div>
+              <dl class="mt-3 space-y-2.5 text-slate-300 text-[11.5px]">
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Target Platform:</dt>
+                  <dd class="text-white font-semibold">SAP S/4HANA EHSM</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Safety Standard:</dt>
+                  <dd class="text-white">ISO 45001 / ISO 14001</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Regulatory Filing:</dt>
+                  <dd class="text-white">OSHA 300, 300A, 301, EPA</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Permit Engine:</dt>
+                  <dd class="text-white">Electronic Permit to Work (PTW)</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Isolation Interlock:</dt>
+                  <dd class="text-white">Work Clearance Management (WCM)</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-text-muted">Mobile Extension:</dt>
+                  <dd class="text-white">SSAM Safety &amp; Inspection Forms</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Code/Rule Manifest Mockup -->
+            <div class="p-5 rounded-xl bg-surface-slate border border-border-slate font-mono text-xs">
+              <div class="flex items-center justify-between text-text-muted pb-2 border-b border-border-slate/60 text-[11px]">
+                <span>rules/ValidatePermitToWork.js</span>
+                <span class="text-accent-sky-bright">SAFETY GATE ENGINE</span>
+              </div>
+              <pre class="mt-3 text-slate-300 leading-relaxed overflow-x-auto text-[11.5px]">
+<span class="text-text-muted">// Electronic Permit to Work interlock for SSAM execution</span>
+<span class="text-sky-400">export default async function</span> <span class="text-emerald-400">ValidatePermitToWork</span>(context) {
+  <span class="text-sky-400">const</span> orderId = context.getBindingObject().OrderId;
+  <span class="text-sky-400">const</span> permitStatus = <span class="text-sky-400">await</span> context.read(
+    <span class="text-emerald-300">'/Services/EHSM.service'</span>,
+    <span class="text-emerald-300">`WorkPermits(OrderId='${orderId}',Type='HOT_WORK')`</span>
+  );
+
+  <span class="text-sky-400">if</span> (!permitStatus.IsAuthorized || permitStatus.AtmosphericGasPPM &gt; 0) {
+    <span class="text-text-muted">// Abort execution if gas reading is unsafe</span>
+    <span class="text-sky-400">await</span> context.executeAction(
+      <span class="text-emerald-300">'/Actions/SafetyLockoutModal.action'</span>
+    );
+    <span class="text-sky-400">return false</span>;
+  }
+  
+  <span class="text-sky-400">return</span> context.executeAction(
+    <span class="text-emerald-300">'/Actions/TransitionToExecutionPhase.action'</span>
+  );
+}</pre>
+            </div>
+
+            <!-- Quantified Metrics Ribbon -->
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="p-3 rounded-lg bg-surface-slate/80 border border-border-slate">
+                <div class="text-lg font-bold font-mono text-emerald-400">Zero</div>
+                <div class="text-[10px] text-text-muted mt-0.5">Permit Overrides</div>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-slate/80 border border-border-slate">
+                <div class="text-lg font-bold font-mono text-sky-400">-55%</div>
+                <div class="text-[10px] text-text-muted mt-0.5">Filing Latency</div>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-slate/80 border border-border-slate">
+                <div class="text-lg font-bold font-mono text-emerald-400">100%</div>
+                <div class="text-[10px] text-text-muted mt-0.5">Audit Readiness</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Next & Previous Practice Area Navigation -->
+      <div class="mt-12 pt-8 border-t border-border-slate flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+        <a href="sap-eam.html" class="text-slate-400 hover:text-accent-sky-bright transition-colors flex items-center gap-1.5">
+          &larr; <span class="text-text-muted">Previous:</span> SAP EAM &amp; Phase Model
+        </a>
+        <a href="../services.html" class="px-3.5 py-2 rounded-lg bg-surface-slate border border-border-slate text-slate-300 hover:text-white hover:border-slate-500 transition-colors flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+          All Practice Areas Hub
+        </a>
+        <a href="sap-btp.html" class="text-slate-400 hover:text-accent-sky-bright transition-colors flex items-center gap-1.5">
+          <span class="text-text-muted">Next:</span> SAP BTP &amp; Clean Core Extensions &rarr;
+        </a>
+      </div>
+
+      <!-- Consultation CTA Banner -->
+      <div class="mt-16 cta-banner p-8 sm:p-12 rounded-2xl text-center relative overflow-hidden">
+        <div class="radial-glow-accent -top-24 left-1/2 -translate-x-1/2"></div>
+        <div class="relative z-10">
+          <span class="mono-tag text-xs font-semibold uppercase tracking-wider text-sky-400 bg-surface-slate/90 border border-sky-500/30 px-3 py-1 rounded-full">
+            Operational Safety Architecture
+          </span>
+          <h3 class="mt-4 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Enforce Zero-Tolerance Safety with SAP EHSM
+          </h3>
+          <p class="mt-3 text-text-muted text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Eliminate paper work permits, automate OSHA regulatory reporting, and integrate live hazard interlocks directly into plant maintenance execution.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="../contact.html" class="btn-primary text-xs uppercase tracking-wider py-3.5 px-8 w-full sm:w-auto">
+              Schedule EHSM Safety Review
+            </a>
+            <a href="../architecture.html" class="btn-secondary text-xs uppercase tracking-wider py-3.5 px-8 w-full sm:w-auto">
+              View Enterprise Architecture
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="border-t border-border-slate/60 bg-dark-slate/90 py-12 relative z-10 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-border-slate">
+        
+        <!-- Col 1: Brand & Positioning -->
+        <div class="md:col-span-2 space-y-3">
+          <a href="../index.html" class="flex items-center gap-2 group" aria-label="LAN Innovations Home">
+            <img src="../assets/logo.svg" alt="LAN Innovations Logo" class="w-6 h-6">
+            <span class="font-bold text-sm tracking-tight text-white">LAN <span class="text-accent-sky-bright">Innovations</span></span>
+          </a>
+          <p class="text-text-muted leading-relaxed max-w-sm">
+            Enterprise SAP mobility and modern full-stack AI engineering consultancy. Delivering offline-native SSAM/FSM applications, Clean Core BTP extensions (CAP &amp; RAP), S/4HANA EHSM operations, and autonomous agentic AI workflows.
+          </p>
+        </div>
+
+        <!-- Col 2: SAP Practices -->
+        <div>
+          <div class="font-mono text-slate-300 font-semibold uppercase tracking-wider mb-3">SAP Practice</div>
+          <ul class="space-y-2 text-text-muted">
+            <li><a href="sap-mobility.html" class="hover:text-white transition-colors">SAP Mobility &amp; FSM</a></li>
+            <li><a href="sap-eam.html" class="hover:text-white transition-colors">SAP EAM &amp; Phase Model</a></li>
+            <li><a href="sap-ehsm.html" class="text-white font-medium">SAP EHSM &amp; Safety</a></li>
+            <li><a href="sap-btp.html" class="hover:text-white transition-colors">SAP BTP Clean Core</a></li>
+            <li><a href="sap-cap-rap.html" class="hover:text-white transition-colors">CAP &amp; ABAP RAP</a></li>
+            <li><a href="sap-custom.html" class="hover:text-white transition-colors">Custom SAP &amp; MDK</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Full-Stack & Firm -->
+        <div>
+          <div class="font-mono text-slate-300 font-semibold uppercase tracking-wider mb-3">Full-Stack &amp; Firm</div>
+          <ul class="space-y-2 text-text-muted">
+            <li><a href="web-development.html" class="hover:text-white transition-colors">Modern Web Apps</a></li>
+            <li><a href="vibe-coding.html" class="hover:text-white transition-colors">Vibe Coding &amp; Velocity</a></li>
+            <li><a href="mobile-apps.html" class="hover:text-white transition-colors">Native Mobile Apps</a></li>
+            <li><a href="agentic-ai.html" class="hover:text-white transition-colors">Agentic AI &amp; MCP</a></li>
+            <li><a href="../about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="../contact.html" class="hover:text-white transition-colors">Contact Firm</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-text-muted">
+        <div>&copy; 2026 LAN Innovations LLC. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="mailto:support@laninnovations.com" class="text-accent-sky-bright hover:underline">support@laninnovations.com</a>
+          <span>&bull;</span>
+          <a href="../contact.html" class="hover:text-white transition-colors">Schedule Consultation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=2.4"></script>
+</body>
+</html>

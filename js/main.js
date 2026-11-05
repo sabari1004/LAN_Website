@@ -224,12 +224,12 @@ function initArchitectureFlowchart() {
       payload: 'POST /sap/opu/odata4/pm/orders/v4/$batch (Chunked Stream)'
     },
     's4-core': {
-      title: 'SAP S/4HANA Core & ABAP RAP Services',
+      title: 'SAP S/4HANA Core, EAM Phase Model & EHSM',
       badge: 'Tier 4 &bull; Enterprise System of Record',
-      desc: 'SAP S/4HANA digital core executing business logic through ABAP RESTful Application Programming (RAP), Core Data Services (CDS), and Mobile Asset Integration Framework (MAIF). ACID transaction commitment.',
-      protocol: 'ABAP RAP Business Objects &bull; CDS Views &bull; MAIF Engine',
+      desc: 'SAP S/4HANA digital core executing business logic through the 9-Phase Maintenance Model, EHSM Permit to Work (PTW) interlocks, ABAP RESTful Application Programming (RAP), and Core Data Services (CDS). ACID transaction commitment.',
+      protocol: '9-Phase Model &bull; EHSM PTW &bull; ABAP RAP BOs &bull; MAIF',
       latency: 'Transactional ACID Lock: 18ms',
-      payload: 'BAPI_ALM_ORDER_MAINTAIN :: Status 0200 Committed'
+      payload: 'BAPI_ALM_ORDER_MAINTAIN :: Phase 07 (In Execution) Committed'
     },
     'ai-layer': {
       title: 'Asynchronous Enterprise AI Agent Layer',

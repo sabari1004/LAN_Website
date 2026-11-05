@@ -40,6 +40,8 @@ LAN_New_Web/
 │   └── main.js                    # Multi-page controllers, telemetry, nav drawer
 ├── services/                      # Dedicated Practice Deep-Dive Pages
 │   ├── sap-mobility.html          # SSAM & Field Service Management (FSM)
+│   ├── sap-eam.html               # SAP EAM & 9-Phase Maintenance Model Execution
+│   ├── sap-ehsm.html              # SAP EHSM: Incidents, Risk & Permit to Work (PTW)
 │   ├── sap-btp.html               # SAP BTP & Clean Core Extensions
 │   ├── sap-cap-rap.html           # Cloud Application Programming (CAP) & ABAP RAP
 │   ├── sap-custom.html            # Custom SAP Apps, Fiori & MDK Modernization
