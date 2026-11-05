@@ -795,3 +795,59 @@ html.light footer .text-white {
 html.light footer a:hover {
   color: #0F172A !important;
 }
+
+
+/* Hero Pill Badge */
+.hero-pill {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38BDF8;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+html.light .hero-pill {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border: 1px solid rgba(2, 132, 199, 0.25) !important;
+  color: #0284C7 !important;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.06) !important;
+}
+
+html.light .hero-pill span {
+  color: #0284C7 !important;
+}
+
+html.light .hero-pill .bg-accent-sky-bright {
+  background-color: #0284C7 !important;
+}
+
+/* Light mode protection for any slate-900 / slate-800 pill elements */
+html.light .bg-slate-900,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/95,
+html.light .bg-slate-800,
+html.light .bg-slate-800\/60 {
+  background-color: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.25) !important;
+  color: #0284C7 !important;
+}
+
+html.light .bg-slate-900 span,
+html.light .bg-slate-900\/90 span {
+  color: #0284C7 !important;
+}
+
+html.light .bg-sky-950\/10 span,
+html.light .bg-sky-950\/20 span,
+html.light .bg-sky-950\/40 span,
+html.light .bg-sky-950\/60 span {
+  color: #0284C7 !important;
+}
+
+html.light .bg-emerald-950\/20 span,
+html.light .bg-emerald-950\/40 span,
+html.light .bg-emerald-950\/60 span,
+html.light .bg-emerald-950\/80 span {
+  color: #059669 !important;
+}
