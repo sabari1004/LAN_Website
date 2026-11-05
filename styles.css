@@ -541,6 +541,8 @@ html.light .bg-surface-slate\/90 {
   background-color: #FFFFFF !important;
 }
 html.light .bg-surface-elevated,
+html.light .bg-surface-elevated\/40,
+html.light .bg-surface-elevated\/50,
 html.light .bg-surface-elevated\/80 {
   background-color: #F1F5F9 !important;
 }
@@ -642,17 +644,108 @@ html.light .theme-toggle-btn:hover {
   background-color: #F1F5F9;
 }
 
+/* ========================================================
+   Mega Dropdown Styling (Dark & Light Theme)
+   ======================================================== */
+.glass-nav .pt-2.mt-auto a,
+.glass-nav .mega-menu-cta {
+  background: rgba(2, 132, 199, 0.1) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  color: #38BDF8 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.glass-nav .pt-2.mt-auto a:hover,
+.glass-nav .mega-menu-cta:hover {
+  background: rgba(2, 132, 199, 0.22) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 0 20px -3px rgba(2, 132, 199, 0.35) !important;
+}
+
 /* Mega dropdown in light mode */
+html.light .glass-nav .rounded-xl,
 html.light .glass-nav .rounded-2xl {
   background: #FFFFFF !important;
   border-color: #E2E8F0 !important;
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.8) !important;
 }
 html.light .glass-nav .border-r {
   border-color: #E2E8F0 !important;
 }
+html.light .glass-nav .border-t {
+  border-color: #E2E8F0 !important;
+}
+html.light .glass-nav a.group\/item {
+  color: #0F172A !important;
+}
 html.light .glass-nav a.group\/item:hover {
   background-color: #F8FAFC !important;
+}
+html.light .glass-nav a.group\/item .text-white {
+  color: #0F172A !important;
+}
+html.light .glass-nav a.group\/item:hover .text-white,
+html.light .glass-nav a.group\/item:hover .group-hover\/item\:text-sky-400 {
+  color: #0284C7 !important;
+}
+html.light .glass-nav a.group\/item:hover .group-hover\/item\:text-emerald-400 {
+  color: #059669 !important;
+}
+html.light .glass-nav a.group\/item p {
+  color: #64748B !important;
+}
+
+/* Category column headers */
+html.light .glass-nav .text-sky-400 {
+  color: #0284C7 !important;
+}
+html.light .glass-nav .text-emerald-400 {
+  color: #059669 !important;
+}
+html.light .glass-nav .bg-sky-400 {
+  background-color: #0284C7 !important;
+}
+html.light .glass-nav .bg-emerald-400 {
+  background-color: #10B981 !important;
+}
+
+/* Mega Dropdown CTA Button ("View All 11 Practice Areas") in Light Mode */
+html.light .glass-nav .pt-2.mt-auto a,
+html.light .glass-nav .bg-surface-elevated\/50,
+html.light .glass-nav .mega-menu-cta {
+  background: #F0F9FF !important;
+  border: 1px solid #BAE6FD !important;
+  color: #0284C7 !important;
+  box-shadow: 0 1px 3px 0 rgba(2, 132, 199, 0.08) !important;
+}
+html.light .glass-nav .pt-2.mt-auto a:hover,
+html.light .glass-nav .bg-surface-elevated\/50:hover,
+html.light .glass-nav .mega-menu-cta:hover {
+  background: #E0F2FE !important;
+  border-color: #38BDF8 !important;
+  color: #0369A1 !important;
+  box-shadow: 0 4px 12px -2px rgba(2, 132, 199, 0.2) !important;
+}
+html.light .glass-nav .pt-2.mt-auto a span,
+html.light .glass-nav .bg-surface-elevated\/50 span,
+html.light .glass-nav .mega-menu-cta span {
+  color: #0284C7 !important;
+}
+html.light .glass-nav .pt-2.mt-auto a:hover span,
+html.light .glass-nav .bg-surface-elevated\/50:hover span,
+html.light .glass-nav .mega-menu-cta:hover span {
+  color: #0369A1 !important;
+}
+html.light .glass-nav .pt-2.mt-auto a svg,
+html.light .glass-nav .bg-surface-elevated\/50 svg,
+html.light .glass-nav .mega-menu-cta svg {
+  color: #0284C7 !important;
+  stroke: #0284C7 !important;
+}
+html.light .glass-nav .pt-2.mt-auto a:hover svg,
+html.light .glass-nav .bg-surface-elevated\/50:hover svg,
+html.light .glass-nav .mega-menu-cta:hover svg {
+  color: #0369A1 !important;
+  stroke: #0369A1 !important;
 }
 
 /* Mobile drawer in light mode */
