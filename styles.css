@@ -508,6 +508,9 @@ html.light .text-sky-400 {
 html.light .text-emerald-400 {
   color: #059669 !important;
 }
+html.light .text-amber-400 {
+  color: #B45309 !important;
+}
 html.light .text-accent-sky-bright {
   color: #0284C7 !important;
 }
@@ -799,19 +802,30 @@ html.light footer a:hover {
 
 /* Hero Pill Badge */
 .hero-pill {
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(56, 189, 248, 0.25);
   color: #38BDF8;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.hero-pill:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.3);
 }
 
 html.light .hero-pill {
   background: rgba(2, 132, 199, 0.08) !important;
   border: 1px solid rgba(2, 132, 199, 0.25) !important;
   color: #0284C7 !important;
-  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.06) !important;
+  box-shadow: 0 1px 3px rgba(2, 132, 199, 0.08) !important;
+}
+
+html.light .hero-pill:hover {
+  border-color: rgba(2, 132, 199, 0.45) !important;
+  box-shadow: 0 4px 12px -2px rgba(2, 132, 199, 0.15) !important;
 }
 
 html.light .hero-pill span {
