@@ -10,6 +10,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initMobileNav();
   initHeaderScroll();
   initMultiPageNav();
@@ -390,5 +391,42 @@ Looking forward to your technical response.`;
 
     // Trigger user mail client
     window.location.href = mailtoUrl;
+  });
+}
+
+
+/**
+ * Dark / Light Theme Controller
+ */
+function initThemeToggle() {
+  const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+  if (!toggleButtons.length) return;
+
+  const updateButtons = (theme) => {
+    toggleButtons.forEach(btn => {
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    });
+  };
+
+  const isLight = document.documentElement.classList.contains('light');
+  updateButtons(isLight ? 'light' : 'dark');
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const currentlyLight = document.documentElement.classList.contains('light');
+      const nextTheme = currentlyLight ? 'dark' : 'light';
+
+      if (nextTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }
+
+      localStorage.setItem('lan-theme', nextTheme);
+      updateButtons(nextTheme);
+    });
   });
 }
