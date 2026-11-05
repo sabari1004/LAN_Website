@@ -383,7 +383,7 @@ ${notes}
 
 Looking forward to your technical response.`;
 
-    const mailtoUrl = `mailto:contact@laninnovations.com?subject=${subject}&body=${encodeURIComponent(bodyContent)}`;
+    const mailtoUrl = `mailto:support@laninnovations.com?subject=${subject}&body=${encodeURIComponent(bodyContent)}`;
 
     if (banner) {
       banner.classList.remove('hidden');
