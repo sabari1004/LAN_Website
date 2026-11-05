@@ -43,7 +43,7 @@ LAN_New_Web/
 │   ├── sap-btp.html               # SAP BTP & Clean Core Extensions
 │   ├── sap-cap-rap.html           # Cloud Application Programming (CAP) & ABAP RAP
 │   ├── sap-custom.html            # Custom SAP Apps, Fiori & MDK Modernization
-│   ├── web-development.html       # Modern Web Applications (Next.js / Fastify)
+│   ├── web-development.html       # Modern Web Applications (React.js / Next.js / Fastify)
 │   ├── vibe-coding.html           # Vibe Coding & Accelerated AI Dev (Antigravity)
 │   ├── mobile-apps.html           # Native iOS (Swift) & Android (Kotlin) Mobile
 │   └── agentic-ai.html            # Agentic AI & Model Context Protocol (MCP)
