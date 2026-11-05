@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Insights &amp; SAP Architecture Playbooks | LAN Innovations</title>
+  <meta name="description" content="Field-tested blueprints, offline synchronization architecture teardowns, S/4HANA EAM phase modeling, and clean core migration guides from LAN Innovations principal engineers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark-slate': '#0B0F19',
+            'surface-slate': '#0F172A',
+            'surface-elevated': '#151F36',
+            'border-slate': '#1E293B',
+            'border-subtle': '#334155',
+            'accent-sky': '#0284C7',
+            'accent-sky-bright': '#38BDF8',
+            'accent-emerald': '#10B981',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            'glow-sky': '0 0 35px -5px rgba(2, 132, 199, 0.45)',
+            'glow-emerald': '0 0 25px -4px rgba(16, 185, 129, 0.35)',
+            'card-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.6)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Anti-FOUT Theme Preload Script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('lan-theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=2.4">
+</head>
+<body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
+
+  <!-- Top Ambient Glow & Grid -->
+  <div class="radial-glow-hero absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+  <div class="bg-grid-mesh absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+
+  <!-- Minimalist Header -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 glass-nav border-b border-border-slate/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group focus:outline-none whitespace-nowrap" aria-label="LAN Innovations Home">
+        <img src="assets/logo.svg" alt="LAN Innovations" class="w-7 h-7 transition-transform duration-200 group-hover:scale-105">
+        <span class="font-semibold text-sm tracking-tight text-white flex items-center gap-1">
+          LAN <span class="text-slate-400 font-normal">Innovations</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-400" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Home</a>
+
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <a href="services.html" class="nav-link flex items-center gap-1 px-3 py-1.5 rounded-md hover:text-white transition-colors focus:outline-none whitespace-nowrap" aria-haspopup="true">
+            <span>Services</span>
+            <svg class="w-3 h-3 text-slate-500 group-hover:text-slate-300 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <!-- Refined Mega Dropdown -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[620px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
+            <div class="rounded-xl bg-[#0F172A] border border-[#1E293B] shadow-2xl p-4 backdrop-blur-2xl grid grid-cols-2 gap-4">
+              
+              <!-- Column 1: SAP Practice -->
+              <div class="flex flex-col gap-1 border-r border-[#1E293B] pr-3">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                  SAP Clean Core &amp; EAM
+                </div>
+                
+                <a href="services/sap-mobility.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP Mobility &amp; FSM</div>
+                  <p class="text-[11px] text-text-muted">SSAM &amp; offline delta sync</p>
+                </a>
+
+                <a href="services/sap-eam.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EAM &amp; Phase Model</div>
+                  <p class="text-[11px] text-text-muted">9-Phase lifecycle &amp; asset ops</p>
+                </a>
+
+                <a href="services/sap-ehsm.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EHSM &amp; Safety</div>
+                  <p class="text-[11px] text-text-muted">Incidents, risk &amp; permit to work</p>
+                </a>
+
+                <a href="services/sap-btp.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP BTP &amp; Clean Core</div>
+                  <p class="text-[11px] text-text-muted">Integration Suite &amp; Cloud Connector</p>
+                </a>
+
+                <a href="services/sap-cap-rap.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">CAP &amp; ABAP RAP</div>
+                  <p class="text-[11px] text-text-muted">Node/Java CAP &amp; modern ABAP</p>
+                </a>
+
+                <a href="services/sap-custom.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">Custom SAP Apps</div>
+                  <p class="text-[11px] text-text-muted">Fiori Elements &amp; MDK migration</p>
+                </a>
+              </div>
+
+              <!-- Column 2: Full-Stack & AI -->
+              <div class="flex flex-col gap-1 pl-1">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Full-Stack &amp; AI
+                </div>
+
+                <a href="services/web-development.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Web App Development</div>
+                  <p class="text-[11px] text-text-muted">React.js, Next.js &amp; Fastify</p>
+                </a>
+
+                <a href="services/vibe-coding.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Vibe Coding &amp; Velocity</div>
+                  <p class="text-[11px] text-text-muted">Antigravity IDE &amp; rapid delivery</p>
+                </a>
+
+                <a href="services/mobile-apps.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Native Mobile Apps</div>
+                  <p class="text-[11px] text-text-muted">iOS Swift &amp; Android Room</p>
+                </a>
+
+                <a href="services/agentic-ai.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Agentic AI &amp; MCP</div>
+                  <p class="text-[11px] text-text-muted">Multi-agent pipelines &amp; self-healing</p>
+                </a>
+
+                <div class="pt-2 mt-auto border-t border-[#1E293B]">
+                  <a href="services.html" class="p-2 rounded-lg bg-surface-elevated/50 hover:bg-surface-elevated transition-colors block text-center">
+                    <span class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center justify-center gap-1.5">
+                      <span>View All 10 Practice Areas</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <a href="architecture.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Architecture</a>
+        <a href="enterprise-ai.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Applied AI</a>
+        <a href="blog.html" class="nav-link active text-white px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Insights</a>
+        <a href="about.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">About</a>
+        <a href="contact.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Contact</a>
+      </nav>
+
+      <!-- Right Actions: Minimal Theme Toggle & Compact Button -->
+      <div class="hidden md:flex items-center gap-2">
+        <button type="button" class="theme-toggle-btn w-8 h-8 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated transition-colors flex items-center justify-center focus:outline-none" aria-label="Toggle light and dark mode" title="Toggle theme">
+          <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+
+        <a href="contact.html" class="btn-primary text-xs font-medium py-1.5 px-3.5 rounded-full whitespace-nowrap">
+          Schedule Review
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer & Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-slate/95 backdrop-blur-2xl hidden transition-all duration-200 md:hidden flex flex-col justify-between p-6 pt-20 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex flex-col gap-3 text-sm font-medium text-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b border-border-slate">
+        <span class="text-xs uppercase tracking-wider text-text-muted font-mono">Navigation</span>
+        <div class="flex items-center gap-2">
+          <button type="button" class="theme-toggle-btn p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors" aria-label="Toggle theme">
+            <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          <button id="mobile-menu-close" type="button" class="text-slate-400 hover:text-white p-1" aria-label="Close menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <a href="index.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Home</a>
+      <a href="services.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">All Services</a>
+      <a href="architecture.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Architecture Flow</a>
+      <a href="enterprise-ai.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Applied Enterprise AI</a>
+      <a href="blog.html" class="mobile-nav-link text-accent-sky-bright font-semibold py-1.5">Engineering Insights (Blog)</a>
+      <a href="about.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">About Firm</a>
+      <a href="contact.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Contact</a>
+    </div>
+    
+    <div class="pt-4 border-t border-border-slate mt-4">
+      <a href="contact.html" class="mobile-nav-link btn-primary w-full text-center py-2 text-xs font-medium rounded-full">
+        Schedule Review
+      </a>
+    </div>
+  </div>
+
+  <main class="relative z-10 pt-20 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 mb-8" aria-label="Breadcrumb">
+        <a href="index.html" class="hover:text-accent-sky-bright transition-colors">Home</a>
+        <span class="text-slate-600">/</span>
+        <span class="text-slate-200 font-medium">Insights</span>
+      </nav>
+
+      <!-- Section Hero -->
+      <div class="text-center max-w-4xl mx-auto mb-14">
+        <div class="hero-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium mb-6">
+          <span class="inline-block w-2 h-2 rounded-full bg-accent-sky-bright animate-pulse"></span>
+          <span>Engineering Insights &bull; Architecture Playbooks &bull; Field Operations</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          Field Engineering Playbooks &amp; <br class="hidden sm:inline">
+          <span class="text-gradient-sky">Enterprise SAP Insights</span>
+        </h1>
+        <p class="mt-4 text-sm sm:text-base md:text-lg text-text-muted max-w-3xl mx-auto leading-relaxed">
+          In-depth technical architecture teardowns, sub-second offline delta synchronization strategies, 9-phase EAM lifecycle patterns, and Clean Core migration blueprints from our principal field mobility architects.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+        <button type="button" class="blog-filter-btn active px-4 py-2 rounded-xl text-xs font-mono font-medium border border-sky-500/60 bg-sky-500/10 text-white transition-all duration-200 shadow-sm" data-category="all">
+          All Playbooks (5)
+        </button>
+        <button type="button" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-category="sap-architecture">
+          SAP Architecture &amp; Core (4)
+        </button>
+        <button type="button" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-medium border border-border-slate bg-surface-slate/80 text-text-muted hover:text-white hover:border-slate-600 transition-all duration-200" data-category="field-strategy">
+          Field Strategy (1)
+        </button>
+      </div>
+
+      <!-- Spotlight Hero Article -->
+      <div id="spotlight-post" class="blog-item mb-12" data-category="sap-architecture">
+        <article class="spotlight-card rounded-2xl p-6 sm:p-10 border border-sky-500/30 bg-surface-slate/80 relative overflow-hidden transition-all duration-300 hover:border-sky-500/60">
+          <div class="radial-glow-accent -top-32 -right-32"></div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div class="lg:col-span-7">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="mono-tag text-[10px] tracking-wider uppercase border-sky-500/40 text-accent-sky-bright bg-sky-500/10">Featured Architecture Teardown</span>
+                <span class="text-xs font-mono text-text-muted">SAP Architecture &amp; Core</span>
+                <span class="text-xs font-mono text-slate-500">&bull;</span>
+                <span class="text-xs font-mono text-text-muted">13 min read</span>
+              </div>
+              
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                <a href="blog/custom-s4hana-field-mobility-and-scheduling.html" class="hover:text-accent-sky-bright transition-colors">
+                  Custom S/4HANA Field Mobility: Extending SSAM with Custom Scheduling &amp; Offline Delta Sync
+                </a>
+              </h2>
+              
+              <p class="mt-4 text-sm sm:text-base text-text-muted leading-relaxed">
+                A deep technical teardown of building sub-second offline delta synchronization for 15,000+ field technicians using SAP SSAM, custom MDK controls, and OData Caching. Explores BTP Mobile Services distribution rules, offline store sizing, and zero-conflict payload commits.
+              </p>
+
+              <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono">
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">Sub-Second Sync</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">15,000+ Technicians</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">Custom MDK Controls</span>
+                <span class="px-2.5 py-1 rounded-md bg-surface-elevated border border-border-slate text-slate-300">OData Delta Token</span>
+              </div>
+
+              <div class="mt-8 flex items-center justify-between pt-6 border-t border-border-slate">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-accent-sky/20 border border-sky-400/30 flex items-center justify-center font-bold text-accent-sky-bright text-xs">
+                    SK
+                  </div>
+                  <div>
+                    <div class="text-xs font-semibold text-white">Sabarish Kamaraju</div>
+                    <div class="text-[11px] text-text-muted font-mono">March 22, 2026</div>
+                  </div>
+                </div>
+
+                <a href="blog/custom-s4hana-field-mobility-and-scheduling.html" class="btn-primary text-xs font-medium py-2 px-4 rounded-lg inline-flex items-center gap-1.5 group">
+                  <span>Read Architecture Playbook</span>
+                  <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5">
+              <a href="blog/custom-s4hana-field-mobility-and-scheduling.html" class="block rounded-xl overflow-hidden border border-border-slate bg-[#090D16] p-3 hover:border-sky-500/50 transition-all duration-300 group/img">
+                <img src="assets/images/architecture-topology.svg" alt="SAP S/4HANA Field Mobility Topology" class="w-full h-auto rounded-lg transition-transform duration-300 group-hover/img:scale-[1.02]">
+                <div class="mt-2.5 text-center text-[11px] font-mono text-text-muted group-hover/img:text-sky-400 transition-colors">
+                  Full 4-tier mobile architecture diagram &rarr;
+                </div>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 4 Article Grid -->
+      <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+        <!-- Card 1: 9-Phase SAP EAM Model -->
+        <article class="blog-item spotlight-card rounded-2xl p-6 sm:p-8 border border-border-slate bg-surface-slate/60 hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between" data-category="sap-architecture">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-border-slate text-xs font-mono">
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP Architecture &amp; Core</span>
+              <span class="text-text-muted">12 min read</span>
+            </div>
+
+            <h3 class="mt-5 text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              <a href="blog/sap-eam-phase-model-rsh-ssam-integration.html" class="hover:text-accent-sky-bright transition-colors">
+                Implementing the 9-Phase SAP EAM Model: Integrating S/4HANA, Resource Scheduling (RSH), and SSAM
+              </a>
+            </h3>
+
+            <p class="mt-3 text-sm text-text-muted leading-relaxed">
+              End-to-end blueprint for replacing legacy maintenance user statuses with the SAP S/4HANA 9-phase model, orchestrating automated dispatch with RSH, and binding mobile field execution.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">9-Phase Lifecycle</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">RSH Integration</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Automated Dispatch</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-border-slate flex items-center justify-between">
+            <div class="text-xs font-mono text-text-muted">
+              March 10, 2026 &bull; Sabarish Kamaraju
+            </div>
+            <a href="blog/sap-eam-phase-model-rsh-ssam-integration.html" class="text-xs font-semibold text-accent-sky-bright hover:underline flex items-center gap-1">
+              <span>Read Post</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2: Decommissioning Syclo Agentry -->
+        <article class="blog-item spotlight-card rounded-2xl p-6 sm:p-8 border border-border-slate bg-surface-slate/60 hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between" data-category="sap-architecture">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-border-slate text-xs font-mono">
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP Architecture &amp; Core</span>
+              <span class="text-text-muted">11 min read</span>
+            </div>
+
+            <h3 class="mt-5 text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              <a href="blog/migrating-syclo-agentry-to-ssam-s4hana.html" class="hover:text-accent-sky-bright transition-colors">
+                Decommissioning Syclo Agentry: A Battle-Tested Migration Blueprint to SSAM &amp; SAP BTP
+              </a>
+            </h3>
+
+            <p class="mt-3 text-sm text-text-muted leading-relaxed">
+              How to migrate entrenched legacy SAP Work Manager Agentry systems to cloud-native SSAM on BTP, cutting sync latency by 65% and retiring on-prem SAP Mobile Platform server clusters.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Agentry Retirement</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">65% Faster Sync</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">BTP Serverless</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-border-slate flex items-center justify-between">
+            <div class="text-xs font-mono text-text-muted">
+              February 28, 2026 &bull; Sabarish Kamaraju
+            </div>
+            <a href="blog/migrating-syclo-agentry-to-ssam-s4hana.html" class="text-xs font-semibold text-accent-sky-bright hover:underline flex items-center gap-1">
+              <span>Read Post</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3: Dynamic Forms in SSAM -->
+        <article class="blog-item spotlight-card rounded-2xl p-6 sm:p-8 border border-border-slate bg-surface-slate/60 hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between" data-category="sap-architecture">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-border-slate text-xs font-mono">
+              <span class="mono-tag text-[10px] tracking-wider uppercase">SAP Architecture &amp; Core</span>
+              <span class="text-text-muted">8 min read</span>
+            </div>
+
+            <h3 class="mt-5 text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              <a href="blog/integrating-sap-dynamic-forms-ssam.html" class="hover:text-accent-sky-bright transition-colors">
+                Integrating Dynamic Forms in SAP SSAM: Enterprise Offline Inspections &amp; S/4HANA Linkage
+              </a>
+            </h3>
+
+            <p class="mt-3 text-sm text-text-muted leading-relaxed">
+              Technical architecture for deploying complex JSON schema dynamic forms in SAP SSAM, maintaining sub-second validation offline and linking attachments to S/4HANA DMS records.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Dynamic JSON Forms</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">DMS Linkage</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Sub-Second Validation</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-border-slate flex items-center justify-between">
+            <div class="text-xs font-mono text-text-muted">
+              February 14, 2026 &bull; Sabarish Kamaraju
+            </div>
+            <a href="blog/integrating-sap-dynamic-forms-ssam.html" class="text-xs font-semibold text-accent-sky-bright hover:underline flex items-center gap-1">
+              <span>Read Post</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 4: Utility Field Operations Strategy -->
+        <article class="blog-item spotlight-card rounded-2xl p-6 sm:p-8 border border-border-slate bg-surface-slate/60 hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between" data-category="field-strategy">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-border-slate text-xs font-mono">
+              <span class="mono-tag text-[10px] tracking-wider uppercase text-emerald-400 border-emerald-900 bg-emerald-950/40">Field Strategy</span>
+              <span class="text-text-muted">8 min read</span>
+            </div>
+
+            <h3 class="mt-5 text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              <a href="blog/digital-transformation-field-utilities.html" class="hover:text-accent-sky-bright transition-colors">
+                The Playbook for Modern Utility Field Operations: Offline-First Architecture &amp; Clean Core
+              </a>
+            </h3>
+
+            <p class="mt-3 text-sm text-text-muted leading-relaxed">
+              Strategic guide for utility enterprise CTOs on transitioning from monolithic legacy systems to decoupled offline-first mobile architectures while preserving SAP S/4HANA clean core principles.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Clean Core Strategy</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Utility Field Ops</span>
+              <span class="px-2 py-0.5 rounded bg-surface-elevated border border-border-slate text-slate-300">Offline-First</span>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-border-slate flex items-center justify-between">
+            <div class="text-xs font-mono text-text-muted">
+              January 20, 2026 &bull; Sabarish Kamaraju
+            </div>
+            <a href="blog/digital-transformation-field-utilities.html" class="text-xs font-semibold text-accent-sky-bright hover:underline flex items-center gap-1">
+              <span>Read Post</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Consultation CTA Banner -->
+      <div class="cta-banner mt-16 p-8 sm:p-12 rounded-2xl text-center relative overflow-hidden">
+        <div class="radial-glow-accent -top-24 left-1/2 -translate-x-1/2"></div>
+        <div class="relative z-10">
+          <span class="mono-tag text-[10px] tracking-widest uppercase text-accent-sky-bright">Architecture Advisory</span>
+          <h3 class="mt-3 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Review Your Field Mobility &amp; Clean Core Architecture</h3>
+          <p class="mt-3 text-text-muted text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Have our principal architects assess your offline sync latency, BTP Cloud Connector throughput, or Syclo Agentry migration roadmap. Actionable blueprint delivered in 10 business days.
+          </p>
+          <div class="mt-7 flex flex-wrap justify-center gap-4">
+            <a href="contact.html" class="btn-primary text-xs uppercase tracking-wider py-3 px-6">
+              Schedule Architecture Review
+            </a>
+            <a href="services.html" class="btn-secondary text-xs uppercase tracking-wider py-3 px-6">
+              Browse Practice Areas
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="border-t border-border-slate bg-surface-slate/60 text-text-muted py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-10 border-b border-border-slate/60">
+        <!-- Brand Info -->
+        <div class="space-y-3">
+          <a href="index.html" class="flex items-center gap-2 group">
+            <img src="assets/logo.svg" alt="LAN Innovations" class="w-7 h-7">
+            <span class="font-bold text-white text-base tracking-tight">LAN Innovations</span>
+          </a>
+          <p class="text-xs text-text-muted max-w-lg mt-1 leading-relaxed">
+            Enterprise SAP mobility and modern full-stack AI engineering consultancy. Delivering offline-native SSAM/FSM applications, Clean Core BTP extensions (CAP &amp; RAP), cloud-native web apps, native mobile systems, and autonomous agentic AI workflows.
+          </p>
+        </div>
+
+        <!-- Navigation Links: 3 Pillars -->
+        <div class="flex flex-col sm:flex-row gap-8 text-xs font-mono">
+          <!-- SAP Pillar Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-sky-400 font-semibold">SAP Clean Core &amp; EAM</span>
+            <a href="services/sap-mobility.html" class="hover:text-white transition-colors">SSAM &amp; FSM Mobility</a>
+            <a href="services/sap-eam.html" class="hover:text-white transition-colors">EAM &amp; Phase Model</a>
+            <a href="services/sap-ehsm.html" class="hover:text-white transition-colors">EHSM Safety Operations</a>
+            <a href="services/sap-btp.html" class="hover:text-white transition-colors">BTP Clean Core</a>
+            <a href="services/sap-cap-rap.html" class="hover:text-white transition-colors">CAP &amp; ABAP RAP</a>
+            <a href="services/sap-custom.html" class="hover:text-white transition-colors">Custom Fiori &amp; MDK</a>
+          </div>
+
+          <!-- Full-Stack & AI Pillar Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold">Full-Stack &amp; AI</span>
+            <a href="services/web-development.html" class="hover:text-white transition-colors">Modern Web Apps</a>
+            <a href="services/vibe-coding.html" class="hover:text-white transition-colors">Vibe Coding &amp; Velocity</a>
+            <a href="services/mobile-apps.html" class="hover:text-white transition-colors">Native iOS &amp; Room</a>
+            <a href="services/agentic-ai.html" class="hover:text-white transition-colors">Agentic AI &amp; MCP</a>
+          </div>
+
+          <!-- Platform & Company Links -->
+          <div class="flex flex-col gap-2">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Company &amp; Lab</span>
+            <a href="blog.html" class="text-sky-400 font-semibold hover:underline">Engineering Insights (Blog)</a>
+            <a href="services.html" class="hover:text-white transition-colors">All Practice Areas</a>
+            <a href="architecture.html" class="hover:text-white transition-colors">Architecture Flow</a>
+            <a href="enterprise-ai.html" class="hover:text-white transition-colors">Applied AI Layer</a>
+            <a href="about.html" class="hover:text-white transition-colors">About Firm</a>
+            <a href="contact.html" class="hover:text-white transition-colors">Book Architecture Review</a>
+            <a href="mailto:support@laninnovations.com" class="text-accent-sky-bright hover:underline">support@laninnovations.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright & Compliance -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+        <div>
+          &copy; 2026 LAN Innovations. All rights reserved. Built for mission-critical enterprise landscapes.
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-[11px]">
+          <span>SAP SSAM &amp; FSM</span>
+          <span>&bull;</span>
+          <span>BTP, CAP &amp; RAP</span>
+          <span>&bull;</span>
+          <span>Next.js &amp; Swift</span>
+          <span>&bull;</span>
+          <span>Vibe Coding &amp; MCP Agents</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=2.4"></script>
+  <script>
+    // Blog category tab filter
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.blog-filter-btn');
+      const blogItems = document.querySelectorAll('.blog-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.getAttribute('data-category');
+
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'border-sky-500/60', 'bg-sky-500/10', 'text-white');
+            b.classList.add('border-border-slate', 'bg-surface-slate/80', 'text-text-muted');
+          });
+
+          btn.classList.add('active', 'border-sky-500/60', 'bg-sky-500/10', 'text-white');
+          btn.classList.remove('border-border-slate', 'bg-surface-slate/80', 'text-text-muted');
+
+          blogItems.forEach(item => {
+            const itemCat = item.getAttribute('data-category');
+            if (category === 'all' || itemCat === category) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

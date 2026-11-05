@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architectural Blueprint: Migrating Legacy Syclo-Agentry to SAP Service & Asset Manager on S/4HANA | LAN Innovations Insights</title>
+  <meta name="description" content="A comprehensive technical playbook for de-risking the migration from legacy SMP / Syclo-Agentry runtimes to modern MDK and Offline OData on SAP BTP and S/4HANA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'dark-slate': '#0B0F19',
+            'surface-slate': '#0F172A',
+            'surface-elevated': '#151F36',
+            'border-slate': '#1E293B',
+            'border-subtle': '#334155',
+            'accent-sky': '#0284C7',
+            'accent-sky-bright': '#38BDF8',
+            'accent-emerald': '#10B981',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            'glow-sky': '0 0 35px -5px rgba(2, 132, 199, 0.45)',
+            'glow-emerald': '0 0 25px -4px rgba(16, 185, 129, 0.35)',
+            'card-elevation': '0 20px 40px -15px rgba(0, 0, 0, 0.6)',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Anti-FOUT Theme Preload Script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('lan-theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css?v=2.4">
+</head>
+<body class="bg-dark-slate text-slate-100 antialiased selection:bg-accent-sky selection:text-white relative min-h-screen">
+
+  <!-- Top Ambient Glow & Grid -->
+  <div class="radial-glow-hero absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+  <div class="bg-grid-mesh absolute inset-x-0 top-0 h-[500px] pointer-events-none z-0"></div>
+
+  <!-- Minimalist Header -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 glass-nav border-b border-border-slate/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      
+      <!-- Brand Logo (Single line, clean) -->
+      <a href="../index.html" class="flex items-center gap-2.5 group focus:outline-none whitespace-nowrap" aria-label="LAN Innovations Home">
+        <img src="../assets/logo.svg" alt="LAN Innovations" class="w-7 h-7 transition-transform duration-200 group-hover:scale-105">
+        <span class="font-semibold text-sm tracking-tight text-white flex items-center gap-1">
+          LAN <span class="text-slate-400 font-normal">Innovations</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links (Single line, no wraps) -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-400" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Home</a>
+
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <a href="../services.html" class="nav-link flex items-center gap-1 px-3 py-1.5 rounded-md hover:text-white transition-colors focus:outline-none whitespace-nowrap" aria-haspopup="true">
+            <span>Services</span>
+            <svg class="w-3 h-3 text-slate-500 group-hover:text-slate-300 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <!-- Refined Mega Dropdown -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[620px] opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 z-50">
+            <div class="rounded-xl bg-[#0F172A] border border-[#1E293B] shadow-2xl p-4 backdrop-blur-2xl grid grid-cols-2 gap-4">
+              
+              <!-- Column 1: SAP Practice -->
+              <div class="flex flex-col gap-1 border-r border-[#1E293B] pr-3">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                  SAP Clean Core &amp; EAM
+                </div>
+                
+                <a href="../services/sap-mobility.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP Mobility &amp; FSM</div>
+                  <p class="text-[11px] text-text-muted">SSAM &amp; offline delta sync</p>
+                </a>
+
+                <a href="../services/sap-eam.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EAM &amp; Phase Model</div>
+                  <p class="text-[11px] text-text-muted">9-Phase lifecycle &amp; asset ops</p>
+                </a>
+
+                <a href="../services/sap-ehsm.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP EHSM &amp; Safety</div>
+                  <p class="text-[11px] text-text-muted">Incidents, risk &amp; permit to work</p>
+                </a>
+
+                <a href="../services/sap-btp.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">SAP BTP &amp; Clean Core</div>
+                  <p class="text-[11px] text-text-muted">Integration Suite &amp; Cloud Connector</p>
+                </a>
+
+                <a href="../services/sap-cap-rap.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">CAP &amp; ABAP RAP</div>
+                  <p class="text-[11px] text-text-muted">Node/Java CAP &amp; modern ABAP</p>
+                </a>
+
+                <a href="../services/sap-custom.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-sky-400">Custom SAP Apps</div>
+                  <p class="text-[11px] text-text-muted">Fiori Elements &amp; MDK migration</p>
+                </a>
+              </div>
+
+              <!-- Column 2: Full-Stack & AI -->
+              <div class="flex flex-col gap-1 pl-1">
+                <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold px-2 py-1 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Full-Stack &amp; AI
+                </div>
+
+                <a href="../services/web-development.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Web App Development</div>
+                  <p class="text-[11px] text-text-muted">React.js, Next.js &amp; Fastify</p>
+                </a>
+
+                <a href="../services/vibe-coding.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Vibe Coding &amp; Velocity</div>
+                  <p class="text-[11px] text-text-muted">Antigravity IDE &amp; rapid delivery</p>
+                </a>
+
+                <a href="../services/mobile-apps.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Native Mobile Apps</div>
+                  <p class="text-[11px] text-text-muted">iOS Swift &amp; Android Room</p>
+                </a>
+
+                <a href="../services/agentic-ai.html" class="p-2 rounded-lg hover:bg-surface-elevated transition-colors group/item block">
+                  <div class="text-xs font-medium text-white group-hover/item:text-emerald-400">Agentic AI &amp; MCP</div>
+                  <p class="text-[11px] text-text-muted">Multi-agent pipelines &amp; self-healing</p>
+                </a>
+
+                <div class="pt-2 mt-auto border-t border-[#1E293B]">
+                  <a href="../services.html" class="p-2 rounded-lg bg-surface-elevated/50 hover:bg-surface-elevated transition-colors block text-center">
+                    <span class="text-xs font-semibold text-sky-400 hover:text-sky-300 flex items-center justify-center gap-1.5">
+                      <span>View All 10 Practice Areas</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <a href="../architecture.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Architecture</a>
+        <a href="../enterprise-ai.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Applied AI</a>
+        <a href="../blog.html" class="nav-link active text-white px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Insights</a>
+        <a href="../about.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">About</a>
+        <a href="../contact.html" class="nav-link px-3 py-1.5 rounded-md hover:text-white transition-colors whitespace-nowrap">Contact</a>
+      </nav>
+
+      <!-- Right Actions: Minimal Theme Toggle & Compact Button -->
+      <div class="hidden md:flex items-center gap-2">
+        <button type="button" class="theme-toggle-btn w-8 h-8 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated transition-colors flex items-center justify-center focus:outline-none" aria-label="Toggle light and dark mode" title="Toggle theme">
+          <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+
+        <a href="../contact.html" class="btn-primary text-xs font-medium py-1.5 px-3.5 rounded-full whitespace-nowrap">
+          Schedule Review
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-toggle" type="button" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-surface-elevated focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer & Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-dark-slate/95 backdrop-blur-2xl hidden transition-all duration-200 md:hidden flex flex-col justify-between p-6 pt-20 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex flex-col gap-3 text-sm font-medium text-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b border-border-slate">
+        <span class="text-xs uppercase tracking-wider text-text-muted font-mono">Navigation</span>
+        <div class="flex items-center gap-2">
+          <button type="button" class="theme-toggle-btn p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors" aria-label="Toggle theme">
+            <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg class="w-4 h-4 moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          <button id="mobile-menu-close" type="button" class="text-slate-400 hover:text-white p-1" aria-label="Close menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <a href="../index.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Home</a>
+      <a href="../services.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">All Services</a>
+      <a href="../architecture.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Architecture Flow</a>
+      <a href="../enterprise-ai.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Applied Enterprise AI</a>
+      <a href="../blog.html" class="mobile-nav-link text-white font-semibold py-1.5">Engineering Insights (Blog)</a>
+      <a href="../about.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">About Firm</a>
+      <a href="../contact.html" class="mobile-nav-link hover:text-accent-sky-bright transition-colors py-1.5">Contact</a>
+    </div>
+    
+    <div class="pt-4 border-t border-border-slate mt-4">
+      <a href="../contact.html" class="mobile-nav-link btn-primary w-full text-center py-2 text-xs font-medium rounded-full">
+        Schedule Review
+      </a>
+    </div>
+  </div>
+
+  <main class="relative z-10 pt-20 pb-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-text-muted mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-accent-sky-bright transition-colors">Home</a>
+        <span class="text-slate-600">/</span>
+        <a href="../blog.html" class="hover:text-accent-sky-bright transition-colors">Insights</a>
+        <span class="text-slate-600">/</span>
+        <span class="text-white font-semibold truncate max-w-[280px] sm:max-w-none">Architectural Blueprint: Migrating Legacy Syclo-Agentry to SAP Service & Asset Manager on S/4HANA</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="pb-8 border-b border-border-slate mb-10">
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono mb-4">
+          <span class="mono-tag text-sky-400 border-sky-800 bg-sky-950/40">Migration Blueprint</span>
+          <span class="text-slate-500">&bull;</span>
+          <span class="text-text-muted">March 20, 2026</span>
+          <span class="text-slate-500">&bull;</span>
+          <span class="text-emerald-400 font-semibold">11 min read</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+          Architectural Blueprint: Migrating Legacy Syclo-Agentry to SAP Service &amp; Asset Manager on S/4HANA
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg text-text-muted leading-relaxed font-normal">
+          A comprehensive technical playbook for de-risking the migration from legacy SMP / Syclo-Agentry runtimes to modern MDK and Offline OData on SAP BTP and S/4HANA.
+        </p>
+
+        <!-- Author Byline -->
+        <div class="mt-6 pt-6 border-t border-border-slate/60 flex items-center justify-between flex-wrap gap-4 text-xs font-mono">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-surface-elevated border border-sky-500/40 flex items-center justify-center text-accent-sky-bright font-bold">
+              SK
+            </div>
+            <div>
+              <div class="text-white font-semibold">Sabarish Kamaraju</div>
+              <div class="text-[11px] text-text-muted">Principal Enterprise Architect</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">SAP SSAM</span><span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">Agentry Migration</span><span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">S/4HANA</span><span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">Mobile Services</span><span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">SAP BTP</span><span class="px-2.5 py-1 rounded-md bg-surface-elevated text-[11px] font-mono text-slate-300 border border-border-slate">Architecture</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Body -->
+      <article id="article-content" class="prose max-w-none">
+         <p>For more than a decade, enterprise asset management in utilities, oil &#x26; gas, and manufacturing relied heavily on <strong>Syclo-Agentry</strong> platforms—most notably <strong>SAP SAP Work Manager</strong> and <strong>SAP Inventory Manager</strong>. Powered by SAP Mobile Platform (SAP Mobile Platform) and on-premise Java/Agentry servers, these systems enabled field personnel to inspect assets and execute work orders disconnected from corporate networks.</p>
+<p>However, with SAP Mobile Platform reaching end-of-life, Windows Server dependencies aging out, and modern mobile OS releases (modern iOS and Android) breaking legacy Agentry OpenUI wrappers, organizations must execute a modernization roadmap. The destination is <strong>SAP Service and Asset Manager (SAP SSAM)</strong> built on <strong>SAP BTP Mobile Services</strong> and <strong>S/4HANA</strong>.</p>
+<p>In this architectural blueprint, I break down the migration strategy, comparing core runtime architectures, mapping data synchronization models, and demonstrating how to convert proprietary Java/Agentry logic into clean <strong>MDK rules</strong> and <strong>MAIF backend exits</strong>.</p>
+<hr>
+<h2 id="the-end-of-life-reality-smp-30-vs-modern-cloud-architecture">The End-of-Life Reality: SAP Mobile Platform vs. Modern Cloud Architecture</h2>
+<p>The technical debt inherent in legacy Agentry deployments manifests in three critical failure modes:</p>
+<ol>
+<li><strong>Monolithic On-Premise Infrastructure:</strong> SAP Mobile Platform requires complex on-premise Windows/Linux clusters, stateful Java virtual machines, and dedicated Agentry communication proxies that struggle to scale elastically.</li>
+<li><strong>Proprietary 4GL Scripting &#x26; Java Stepping:</strong> Business logic in Agentry is split between proprietary XML/Agentry editor definitions and compiled Java OpenSearch/Fetch classes. Debugging mobile memory leaks requires low-level Agentry test clients.</li>
+<li><strong>Fragile Client Runtimes:</strong> Agentry’s OpenUI framework bridges native controls through a proprietary C++ communication bridge that cannot keep pace with modern touch paradigms, biometric auth, or modern MDM/MAM containerization (Microsoft Intune, AirWatch).</li>
+</ol>
+<h3 id="architectural-topology-comparison">Architectural Topology Comparison</h3>
+<div class="my-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-950 p-2 sm:p-3 overflow-hidden shadow-xl group relative">
+  <a href="../assets/images/topology-legacy-migration.svg" target="_blank" rel="noopener noreferrer" title="Click to view full-resolution vector architecture diagram">
+    <img src="../assets/images/topology-legacy-migration.svg" alt="Syclo-Agentry Legacy Architecture Sunset vs SAP SSAM &#x26; BTP Modern Cloud Target Architecture" class="w-full h-auto rounded-lg" loading="lazy">
+  </a>
+</div>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>LEGACY AGENTRY TOPOLOGY:</span></span>
+<span class="line"><span>┌─────────────────┐       ┌───────────────────────┐       ┌─────────────────────┐</span></span>
+<span class="line"><span>│ Agentry Client  │ ====> │ SAP Mobile Platform Server        │ ====> │ SAP ECC 6.0 / EHP8  │</span></span>
+<span class="line"><span>│ (C++ / OpenUI)  │ (TCP) │ (Agentry Java Engine) │ (RFC) │ (Custom BAPIs/ABAP) │</span></span>
+<span class="line"><span>└─────────────────┘       └───────────────────────┘       └─────────────────────┘</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>MODERN BTP / SSAM TOPOLOGY:</span></span>
+<span class="line"><span>┌─────────────────┐       ┌───────────────────────┐       ┌─────────────────────┐</span></span>
+<span class="line"><span>│ SSAM App (MDK)  │ ====> │ SAP BTP Mobile Svc    │ ====> │ SAP S/4HANA Core    │</span></span>
+<span class="line"><span>│ (Native iOS/And)│(HTTPS)│ (Offline OData Engine)│(mTLS) │ (MAIF / OData v4)   │</span></span>
+<span class="line"><span>└─────────────────┘       └───────────────────────┘       └─────────────────────┘</span></span></code></pre>
+<hr>
+<h2 id="migration-roadmap-mapping-data--synchronization-layers">Migration Roadmap: Mapping Data &#x26; Synchronization Layers</h2>
+<p>The single largest mental model shift when transitioning from Agentry to SSAM is moving from <strong>Agentry Transactions &#x26; Fetches</strong> to <strong>OData Delta Queries &#x26; Defining Requests</strong>.</p>
+<h3 id="1-complex-tables-to-local-offline-odata-collections">1. Complex Tables to Local Offline OData Collections</h3>
+<p>In Syclo-Agentry, reference datasets (e.g., Plant lists, Work Centers, Code Groups, Catalog Profiles) were stored as <strong>Complex Tables</strong> or <strong>Data Tables</strong>, synced via SQL queries into a local proprietary encrypted database (<code>AgentryClient.db</code>).</p>
+<p>In SSAM, these become <strong>Defining Requests</strong> within the Offline OData service configuration in SAP BTP Mobile Services:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "Name"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"PlantCollection"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "Query"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/SAPAssetManager/Services/AssetManager.service/Plants?$select=Plant,PlantDescription"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  "AutomaticallyRetrievesStreams"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p><strong>Architectural Tip:</strong> Avoid unbounded defining requests. In legacy Agentry, complex tables could download 500,000 rows without immediately killing the client. In Offline OData, downloading 500,000 records into local SQLite UltraLite will bloat the initial sync time to 15+ minutes. Always apply delta tokens and scoped server-side filters.</p>
+</blockquote>
+<h3 id="2-transaction-stepping-to-mdk-actions--rules">2. Transaction Stepping to MDK Actions &#x26; Rules</h3>
+<p>Agentry handled updates via multi-step transactions: client validation, object creation, server stepping, and RFC execution.</p>
+<p>In SSAM, this is orchestrated via declarative <strong>MDK Actions</strong> triggered by <strong>MDK Rules</strong>. The following rule demonstrates handling a dynamic Work Order status transition with safety validation and offline queue commitment:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * MDK Rule: WorkOrderMobileStatusChange.js</span></span>
+<span class="line"><span style="color:#6A737D"> * Converts legacy Agentry WorkOrderUpdate Transaction to SSAM MDK</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@param</span><span style="color:#B392F0"> {IClientAPI}</span><span style="color:#E1E4E8"> context</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> ODataDate </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> './ODataDate'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#F97583"> async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> WorkOrderMobileStatusChange</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> binding</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> context.binding;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> clientData</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">getClientData</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#6A737D">  // 1. Verify pre-conditions (Safety Check &#x26; Equipment Verification)</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> isSafetyPermitCleared</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">read</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    '/SAPAssetManager/Services/AssetManager.service'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    `${</span><span style="color:#E1E4E8">binding</span><span style="color:#9ECBFF">[</span><span style="color:#9ECBFF">'@odata.readLink'</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">}/WCMDocumentHeaders`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    [],</span></span>
+<span class="line"><span style="color:#9ECBFF">    "$filter=PermitActive eq true and IsolationStatus eq 'NORMALIZED'"</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">isSafetyPermitCleared </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> isSafetyPermitCleared.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> ===</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">executeAction</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/SAPAssetManager/Actions/Safety/SafetyPermitBlockedDialog.action'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // 2. Prepare OData ChangeSet Properties</span></span>
+<span class="line"><span style="color:#E1E4E8">  clientData.MobileStatus </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'IN_PROGRESS'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  clientData.EffectiveTimestamp </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ODataDate</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toISOString</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // 3. Queue atomic offline OData change to SSAM delta store</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">executeAction</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#9ECBFF">    "Name"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/SAPAssetManager/Actions/Common/GenericUpdate.action"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "Properties"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">      "Target"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">        "EntitySet"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"MyWorkOrderHeaders"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Service"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/SAPAssetManager/Services/AssetManager.service"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "ReadLink"</span><span style="color:#E1E4E8">: binding[</span><span style="color:#9ECBFF">'@odata.readLink'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#9ECBFF">      "Properties"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">        "MobileStatus"</span><span style="color:#E1E4E8">: clientData.MobileStatus,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "OrderHeaderChangedDate"</span><span style="color:#E1E4E8">: clientData.EffectiveTimestamp</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#9ECBFF">      "Headers"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#9ECBFF">        "OfflineOData.TransactionID"</span><span style="color:#E1E4E8">: binding.OrderId</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<hr>
+<h2 id="backend-modernization-abap-badis-and-maif">Backend Modernization: ABAP BAdIs and MAIF</h2>
+<p>In legacy implementations, custom logic was embedded in <code>Z_SYCLO_*</code> function modules, user exits, or custom Agentry Java classes overriding standard fetch steps.</p>
+<p>In S/4HANA, SSAM leverages the <strong>Mobile Application Integration Framework (MAIF)</strong>. Instead of modifying core tables or creating non-standard RFC endpoints:</p>
+<ol>
+<li><strong>Data Staging &#x26; Filtering:</strong> Leverage MAIF Assignment Types (<code>BAdI /MERP/PM_ORDER_ASSIGNMENT</code>) to determine exactly which Work Orders, Operations, and Notifications are routed to a specific technician’s mobile client.</li>
+<li><strong>Entity Extensions:</strong> Extend standard OData entities (<code>MyWorkOrderHeader</code>, <code>MyWorkOrderOperation</code>) through the SEGW enhancement framework or CDS view extensions, keeping the S/4HANA core <strong>Clean Core compliant</strong>.</li>
+<li><strong>Transaction Processing:</strong> Implement customer exits in MAIF class handlers (e.g., <code>/MERP/CL_PM_WORKORDER_UPDATE</code>) to execute custom business validations prior to calling standard <code>BAPI_ALM_ORDER_MAINTAIN</code>.</li>
+</ol>
+<h3 id="sample-abap-badi-filter-for-utility-service-territories">Sample ABAP BAdI Filter for Utility Service Territories</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="abap"><code><span class="line"><span style="color:#F97583">METHOD</span><span style="color:#B392F0"> /merp/if_pm_order_assign</span><span style="color:#E1E4E8">~</span><span style="color:#B392F0">filter_orders</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#6A737D">  " Filter work orders based on field technician service territory &#x26; dynamic qualification</span></span>
+<span class="line"><span style="color:#F97583">  LOOP AT</span><span style="color:#E1E4E8"> ct_orders </span><span style="color:#F97583">ASSIGNING</span><span style="color:#F97583"> FIELD-SYMBOL</span><span style="color:#E1E4E8">(&#x3C;ls_order>).</span></span>
+<span class="line"><span style="color:#F97583">    IF</span><span style="color:#E1E4E8"> &#x3C;ls_order>-planplant </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> '1000'</span><span style="color:#F97583"> AND</span><span style="color:#E1E4E8"> &#x3C;ls_order>-ingrp </span><span style="color:#F97583">IN</span><span style="color:#E1E4E8"> s_territory.</span></span>
+<span class="line"><span style="color:#6A737D">      " Validate technician high-voltage certification</span></span>
+<span class="line"><span style="color:#F97583">      IF</span><span style="color:#E1E4E8"> check_technician_clearance( iv_user </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> sy</span><span style="color:#E1E4E8">-</span><span style="color:#79B8FF">uname</span><span style="color:#E1E4E8"> iv_order </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> &#x3C;ls_order>-aufnr ) </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> abap_true</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;ls_order>-mobile_sync_flag </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> abap_true</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#F97583">      ELSE</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;ls_order>-mobile_sync_flag </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> abap_false</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#F97583">      ENDIF</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#F97583">    ENDIF</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#F97583">  ENDLOOP</span><span style="color:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#F97583">ENDMETHOD</span><span style="color:#E1E4E8">.</span></span></code></pre>
+<hr>
+<h2 id="handling-complex-scenarios-wcm--field-inspections">Handling Complex Scenarios: WCM &#x26; Field Inspections</h2>
+<p>Two areas that cause the greatest friction during Agentry-to-SSAM migrations are <strong>Work Clearance Management (WCM)</strong> and <strong>Field Forms</strong>:</p>
+<h3 id="1-work-clearance-management-wcm">1. Work Clearance Management (WCM)</h3>
+<p>Legacy Work Manager implementations often relied on heavily customized screens to display tagging lists, operational steps, and lock/tag IDs.</p>
+<p>In SSAM, WCM is supported natively through dedicated Operational WCM components. Migration requires:</p>
+<ul>
+<li>Normalizing custom customer tagging statuses to standard SAP WCM isolation cycles (<code>PREPARED</code>, <code>TAGGED</code>, <code>UNTAGGED</code>).</li>
+<li>Utilizing MDK Section Pages to present multi-step tag confirmation flows with cryptographic timestamp verification.</li>
+</ul>
+<h3 id="2-replacing-proprietary-agentry-dynamic-forms">2. Replacing Proprietary Agentry Dynamic Forms</h3>
+<p>Legacy setups used custom Syclo Agentry screens or embedded PDF generation for job hazard assessments. Modern architectures integrate <strong>SAP Dynamic Forms (powered by SmartForms/HTML5)</strong> or <strong>Mirata Forms</strong>, delivering:</p>
+<ul>
+<li>Responsive, offline-capable digital forms rendered inside native MDK webview wrappers.</li>
+<li>Automatic payload bundling during the standard SSAM OData flush cycle.</li>
+</ul>
+<hr>
+<h2 id="migration-checklist-lessons-from-tier-1-utility-rollouts">Migration Checklist: Lessons from Tier-1 Utility Rollouts</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Phase</th><th align="left">Milestone</th><th align="left">Critical Architectural Checkpoint</th></tr></thead><tbody><tr><td align="left"><strong>Discovery</strong></td><td align="left">Logic Inventory</td><td align="left">Catalog all proprietary Syclo Java classes and map each directly to MDK rules or backend BAdIs.</td></tr><tr><td align="left"><strong>Data Design</strong></td><td align="left">Defining Request Scoping</td><td align="left">Benchmark initial sync times over simulated 3G/LTE throttling; keep initial database payload &#x3C; 80MB.</td></tr><tr><td align="left"><strong>Integration</strong></td><td align="left">Cloud Connector &#x26; BTP</td><td align="left">Configure principal propagation via X.509 client certificates or OAuth tokens to avoid generic service users.</td></tr><tr><td align="left"><strong>Packaging</strong></td><td align="left">Custom MDK Branding</td><td align="left">Bundle custom native plugins (camera, barcode scanners, GIS layers) into branded iOS IPA and Android APKs.</td></tr><tr><td align="left"><strong>Cutover</strong></td><td align="left">Dual-Run Strategy</td><td align="left">Run pilot service territories in parallel; ensure legacy Syclo delta queue and MAIF delta queue do not create database lock collisions.</td></tr></tbody></table>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>Migrating from Syclo-Agentry to SAP Service &#x26; Asset Manager on S/4HANA is not merely a UI rewrite—it is a strategic re-platforming that unlocks cloud elasticity, zero-trust mobile security, and sub-second offline delta synchronization for field operatives.</p>
+<p>By respecting S/4HANA Clean Core boundaries, structuring MAIF assignment filters, and mastering MDK offline OData mechanics, enterprise architects can decommission aging legacy servers and empower field teams with a resilient, modern digital workspace.</p> 
+      </article>
+
+      <!-- Author Bio Box -->
+      <div class="mt-16 p-6 sm:p-8 rounded-2xl bg-surface-slate/90 border border-border-slate flex flex-col sm:flex-row items-center sm:items-start gap-5">
+        <div class="w-14 h-14 rounded-full bg-surface-elevated border border-sky-500/50 flex items-center justify-center text-accent-sky-bright font-bold text-lg shrink-0">
+          SK
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-white">Sabarish Kamaraju</h2>
+            <span class="mono-tag text-[10px] text-sky-400 border-sky-800">Author</span>
+          </div>
+          <p class="mt-2 text-xs sm:text-sm text-text-muted leading-relaxed">
+            Principal Enterprise Solutions Architect with over a decade of deep expertise delivering mission-critical SAP Service &amp; Asset Manager (SSAM), S/4HANA EAM 9-Phase Model, and offline field mobility ecosystems for global utilities and asset-heavy industries.
+          </p>
+          <div class="mt-3 text-xs font-mono text-accent-sky-bright">
+            <a href="https://www.linkedin.com/in/sabarish-k-6b979918/" target="_blank" rel="noopener" class="hover:underline flex items-center gap-1">
+              Connect on LinkedIn &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Navigation Footer -->
+      <div class="mt-12 pt-8 border-t border-border-slate flex items-center justify-between gap-4 text-xs font-mono">
+        <a href="sap-eam-phase-model-rsh-ssam-integration.html" class="text-slate-400 hover:text-accent-sky-bright transition-colors flex items-center gap-1.5 max-w-[45%]">
+          &larr; <span class="text-text-muted">Previous:</span> <span class="truncate">Integrating SAP EAM Phase Model, RSH &amp; Field Mobility</span>
+        </a>
+        <a href="integrating-sap-dynamic-forms-ssam.html" class="text-slate-400 hover:text-accent-sky-bright transition-colors flex items-center gap-1.5 max-w-[45%] text-right justify-end">
+          <span class="text-text-muted">Next:</span> <span class="truncate">Configuring SAP Dynamic Forms for SAP SSAM</span> &rarr;
+        </a>
+      </div>
+
+      <!-- Consultation CTA Banner -->
+      <div class="mt-14 cta-banner p-8 sm:p-12 rounded-2xl text-center relative overflow-hidden">
+        <div class="radial-glow-accent -top-24 left-1/2 -translate-x-1/2"></div>
+        <div class="relative z-10">
+          <span class="mono-tag text-xs font-semibold uppercase tracking-wider text-sky-400 bg-surface-slate/90 border border-sky-500/30 px-3 py-1 rounded-full">
+            Architecture Practice Review
+          </span>
+          <h3 class="mt-4 text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Evaluate Your Enterprise Mobility &amp; EAM Architecture
+          </h3>
+          <p class="mt-3 text-text-muted text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Work directly with our principal architects to blueprint your S/4HANA Phase Model, SSAM offline sync, or legacy Agentry migration.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="../contact.html" class="btn-primary text-xs uppercase tracking-wider py-3.5 px-8 w-full sm:w-auto">
+              Schedule Technical Review
+            </a>
+            <a href="../blog.html" class="btn-secondary text-xs uppercase tracking-wider py-3.5 px-8 w-full sm:w-auto">
+              Browse All Playbooks
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="border-t border-border-slate/60 bg-dark-slate/90 py-12 relative z-10 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-border-slate">
+        
+        <!-- Col 1: Brand & Positioning -->
+        <div class="md:col-span-2 space-y-3">
+          <a href="../index.html" class="flex items-center gap-2 group" aria-label="LAN Innovations Home">
+            <img src="../assets/logo.svg" alt="LAN Innovations Logo" class="w-6 h-6">
+            <span class="font-bold text-sm tracking-tight text-white">LAN <span class="text-accent-sky-bright">Innovations</span></span>
+          </a>
+          <p class="text-text-muted leading-relaxed max-w-sm">
+            Enterprise SAP mobility and modern full-stack AI engineering consultancy. Delivering offline-native SSAM/FSM applications, Clean Core BTP extensions (CAP &amp; RAP), S/4HANA EAM 9-Phase implementations, and autonomous agentic AI workflows.
+          </p>
+        </div>
+
+        <!-- Col 2: SAP Practices -->
+        <div>
+          <div class="font-mono text-slate-300 font-semibold uppercase tracking-wider mb-3">SAP Practice</div>
+          <ul class="space-y-2 text-text-muted">
+            <li><a href="../services/sap-mobility.html" class="hover:text-white transition-colors">SAP Mobility &amp; FSM</a></li>
+            <li><a href="../services/sap-eam.html" class="hover:text-white transition-colors">SAP EAM &amp; Phase Model</a></li>
+            <li><a href="../services/sap-ehsm.html" class="hover:text-white transition-colors">SAP EHSM &amp; Safety</a></li>
+            <li><a href="../services/sap-btp.html" class="hover:text-white transition-colors">SAP BTP Clean Core</a></li>
+            <li><a href="../services/sap-cap-rap.html" class="hover:text-white transition-colors">CAP &amp; ABAP RAP</a></li>
+            <li><a href="../services/sap-custom.html" class="hover:text-white transition-colors">Custom SAP &amp; MDK</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Full-Stack & Firm -->
+        <div>
+          <div class="font-mono text-slate-300 font-semibold uppercase tracking-wider mb-3">Full-Stack &amp; Firm</div>
+          <ul class="space-y-2 text-text-muted">
+            <li><a href="../services/web-development.html" class="hover:text-white transition-colors">Modern Web Apps</a></li>
+            <li><a href="../services/vibe-coding.html" class="hover:text-white transition-colors">Vibe Coding &amp; Velocity</a></li>
+            <li><a href="../services/mobile-apps.html" class="hover:text-white transition-colors">Native Mobile Apps</a></li>
+            <li><a href="../services/agentic-ai.html" class="hover:text-white transition-colors">Agentic AI &amp; MCP</a></li>
+            <li><a href="../blog.html" class="text-white font-medium">Engineering Insights (Blog)</a></li>
+            <li><a href="../about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="../contact.html" class="hover:text-white transition-colors">Contact Firm</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-text-muted">
+        <div>&copy; 2026 LAN Innovations LLC. All rights reserved.</div>
+        <div class="flex items-center gap-4">
+          <a href="mailto:support@laninnovations.com" class="text-accent-sky-bright hover:underline">support@laninnovations.com</a>
+          <span>&bull;</span>
+          <a href="../contact.html" class="hover:text-white transition-colors">Schedule Consultation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=2.4"></script>
+</body>
+</html>
