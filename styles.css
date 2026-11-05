@@ -691,16 +691,28 @@ html.light .btn-secondary:hover {
   color: #0F172A !important;
 }
 
-/* Keep code and live simulation console dark for readability */
-html.light pre,
-html.light #sim-telemetry-output {
+/* Live simulation terminal and dark consoles */
+html.light #sim-telemetry-output,
+html.light #inspect-console {
   background-color: #0B0F19 !important;
   color: #E2E8F0 !important;
   border-color: #1E293B !important;
 }
-html.light pre .text-slate-300,
-html.light #sim-telemetry-output .text-slate-300 {
+html.light #sim-telemetry-output .text-slate-300,
+html.light #inspect-console .text-slate-300 {
   color: #CBD5E1 !important;
+}
+
+/* Light mode code editor snippets */
+html.light pre:not(#sim-telemetry-output):not(#inspect-console) {
+  background-color: transparent !important;
+  color: #334155 !important;
+}
+html.light pre:not(#sim-telemetry-output):not(#inspect-console) .text-slate-300 {
+  color: #334155 !important;
+}
+html.light pre:not(#sim-telemetry-output):not(#inspect-console) .text-emerald-300 {
+  color: #059669 !important;
 }
 
 /* Badges & Pills in light mode */
@@ -927,8 +939,12 @@ html.light .bg-gradient-to-r.rounded-2xl .radial-glow-accent {
 
 html.light .feature-panel,
 html.light .bg-gradient-to-b.rounded-2xl {
-  background: #F8FAFC !important;
+  background: #F1F5F9 !important;
   background-image: none !important;
-  border-color: #E2E8F0 !important;
+  border: 1px solid #E2E8F0 !important;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .feature-panel .blur-3xl {
+  opacity: 0.4;
 }
